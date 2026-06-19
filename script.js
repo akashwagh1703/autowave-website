@@ -53,9 +53,7 @@ function validateForm(data) {
 }
 
 // API configuration - update this to match your API deployment
-const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? 'http://localhost:3000'
-  : 'https://api.autowave.in';
+const API_BASE_URL = 'https://api.autowave.in';
 const API_URL = `${API_BASE_URL}/api/website/leads/capture-demo`;
 
 demoForm.addEventListener('submit', async (e) => {
