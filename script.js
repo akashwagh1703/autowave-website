@@ -1,135 +1,227 @@
-// Smooth Scroll for Navigation
+// Mobile Menu
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navMenu = document.getElementById('navMenu');
+
+mobileMenuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
+
+// Floating Form
+const floatingForm = document.getElementById('floatingForm');
+const formClose = document.getElementById('formClose');
+const demoForm = document.getElementById('demoForm');
+const bookDemoButtons = document.querySelectorAll('#bookDemoHeader, #bookDemoPricing, #bookDemoCTA');
+
+bookDemoButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        floatingForm.style.display = 'block';
+    });
+});
+
+formClose.addEventListener('click', () => {
+    floatingForm.style.display = 'none';
+});
+
+setTimeout(() => {
+    floatingForm.style.display = 'block';
+}, 5000);
+
+demoForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(demoForm);
+    console.log('Demo Request:', Object.fromEntries(formData));
+    alert('Thank you! Our team will contact you shortly.');
+    demoForm.reset();
+    floatingForm.style.display = 'none';
+});
+
+// Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        if (this.getAttribute('href') !== '#') {
+        const href = this.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
+            document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+            navMenu.classList.remove('active');
         }
     });
 });
 
-// Mobile Menu Toggle
-function toggleMobileMenu() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenu.classList.toggle('active');
-}
+// Header Scroll
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    header.classList.toggle('scrolled', window.scrollY > 10);
+});
 
-// Demo Form Submission
-const demoForm = document.getElementById('demo-form');
-if (demoForm) {
-    demoForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Thank you! Your demo request has been received. Our team will contact you shortly.');
-        this.reset();
-    });
-}
+// FAQ Accordion
+const faqQuestions = document.querySelectorAll('.faq-question');
 
-// Button Actions
-function startTrial() {
-    alert('Redirecting to free trial signup... (Demo)');
-    // In real app: window.location.href = '/signup';
-}
-
-function bookDemo() {
-    const floatingDemo = document.querySelector('.floating-demo');
-    if (floatingDemo) {
-        floatingDemo.scrollIntoView({ behavior: 'smooth' });
-    } else {
-        alert('Demo booking form opened!');
-    }
-}
-
-// Fake live stats animation
-function animateStats() {
-    const stats = document.querySelectorAll('.stat-value');
-    stats.forEach((stat, index) => {
-        let target = parseFloat(stat.textContent);
-        let current = 0;
-        const increment = target / 60;
+faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        const isActive = faqItem.classList.contains('active');
         
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                clearInterval(timer);
-                if (stat.textContent.includes('%')) {
-                    stat.textContent = target.toFixed(1) + '%';
-                } else {
-                    stat.textContent = Math.floor(target).toLocaleString();
-                }
-            } else {
-                if (stat.textContent.includes('%')) {
-                    stat.textContent = current.toFixed(1) + '%';
-                } else {
-                    stat.textContent = Math.floor(current).toLocaleString();
-                }
-            }
-        }, 30);
-    });
-}
-
-// Trigger animations when in view
-function handleScrollAnimations() {
-    const cards = document.querySelectorAll('.feature-card, .integration-card');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
         });
-    }, {
-        threshold: 0.1
-    });
-    
-    cards.forEach(card => {
-        card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        observer.observe(card);
-    });
-}
-
-// Keyboard shortcuts
-document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-        const searchInput = document.querySelector('input[type="text"]');
-        if (searchInput) searchInput.focus();
-    }
-});
-
-// Initialize everything
-window.onload = function() {
-    console.log('%cAutoWave Landing Page Loaded Successfully 🚀', 'color: #00D084; font-size: 16px; font-weight: bold');
-    
-    // Animate stats after load
-    setTimeout(() => {
-        animateStats();
-    }, 1200);
-    
-    handleScrollAnimations();
-    
-    // Close mobile menu when clicking links
-    const mobileLinks = document.querySelectorAll('.mobile-menu a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.remove('active');
-        });
-    });
-    
-    // Add subtle header shadow on scroll
-    window.addEventListener('scroll', () => {
-        const header = document.querySelector('.header');
-        if (window.scrollY > 50) {
-            header.style.boxShadow = '0 10px 15px -3px rgb(0 0 0 / 0.1)';
-        } else {
-            header.style.boxShadow = 'none';
+        
+        if (!isActive) {
+            faqItem.classList.add('active');
         }
     });
+});
+
+// Scroll Animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
 };
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.feature-card, .pricing-card, .integration-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
+
+// WhatsApp Chat Replay - Real Lead Generation Agent
+const chatConversation = [
+    { type: 'user', message: 'Hi' },
+    { type: 'bot', message: 'Hi there! 👋' },
+    { type: 'bot', message: 'Welcome to AutoWave!\n\nWe help businesses automate WhatsApp conversations.' },
+    { type: 'user', message: 'That sounds interesting.\n\nWhat can it do for my business?' },
+    { type: 'bot', message: 'Great question! 🎯\n\nHere\'s what AutoWave does:' },
+    { type: 'bot', message: '✅ Respond to inquiries 24/7\n\n✅ Capture & qualify leads\n\n✅ Send catalogs & offers\n\n✅ Schedule appointments' },
+    { type: 'user', message: 'How much does it cost?' },
+    { type: 'bot', message: 'Great question!\n\nWe have flexible pricing:\n\n💰 Starter: ₹999/month\n\n📊 Professional: ₹2,999/month (Most Popular)\n\n🚀 Enterprise: Custom pricing' },
+    { type: 'bot', message: 'Professional plan includes:\n\n• Up to 10,000 conversations/month\n\n• Advanced automation\n\n• Priority 24/7 support' },
+    { type: 'user', message: 'Can I try before buying?' },
+    { type: 'bot', message: 'Absolutely! 🚀\n\nWe offer a completely FREE trial.\n\nNo credit card required!' },
+    { type: 'bot', message: 'You can set up in just 2 minutes and start automating right away.' },
+    { type: 'bot', message: 'By the way, what type of business do you run?\n\nI can share specific results for your industry 😊' },
+    { type: 'user', message: 'We run an e-commerce store' },
+    { type: 'bot', message: 'Perfect! 🛍️\n\nE-commerce stores love AutoWave!' },
+    { type: 'bot', message: 'Here\'s what our clients see:\n\n📈 3x faster customer responses\n\n📈 45% increase in conversions\n\n📈 60% less support time needed' },
+    { type: 'bot', message: 'Real example:\n\nOne store got 150+ qualified leads in first month!\n\nWith just 2 hours of setup 🎯' },
+    { type: 'bot', message: 'Ready to grow your sales? 🚀\n\nClick "Start Free Trial" above.\n\nNo commitment needed!' },
+    { type: 'bot', message: 'Or book a quick demo with our team.\n\nWe\'ll show you exactly how it works for your store.' }
+];
+
+let chatReplayRunning = false;
+let chatReplayTimeout = null;
+
+function showTypingIndicator() {
+    const chatMessages = document.getElementById('chatMessages');
+    const typingEl = document.createElement('div');
+    typingEl.className = 'chat-message message-bot';
+    typingEl.innerHTML = `
+        <div class="typing-indicator">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        </div>
+    `;
+    typingEl.id = 'typing-indicator';
+    chatMessages.appendChild(typingEl);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return typingEl;
+}
+
+function removeTypingIndicator() {
+    const typingEl = document.getElementById('typing-indicator');
+    if (typingEl) typingEl.remove();
+}
+
+function addChatMessage(msg, isUser = false) {
+    const chatMessages = document.getElementById('chatMessages');
+    const messageEl = document.createElement('div');
+    messageEl.className = `chat-message message-${isUser ? 'user' : 'bot'}`;
+    
+    const bubbleEl = document.createElement('div');
+    bubbleEl.className = 'message-bubble';
+    bubbleEl.innerHTML = msg;
+    
+    messageEl.appendChild(bubbleEl);
+    
+    // Add read receipt for user messages
+    if (isUser) {
+        const timeEl = document.createElement('div');
+        timeEl.className = 'message-time';
+        timeEl.innerHTML = `<span class="read-receipt">✓✓</span>`;
+        messageEl.appendChild(timeEl);
+    }
+    
+    chatMessages.appendChild(messageEl);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function updateChatStatus(status) {
+    const statusEl = document.getElementById('chatStatus');
+    if (statusEl) {
+        statusEl.textContent = status;
+    }
+}
+
+function startChatReplay() {
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.innerHTML = '';
+    updateChatStatus('Online');
+    chatReplayRunning = true;
+    
+    let messageIndex = 0;
+    
+    function playNextMessage() {
+        if (messageIndex >= chatConversation.length) {
+            // Restart replay after a delay
+            updateChatStatus('Online');
+            chatReplayTimeout = setTimeout(() => {
+                startChatReplay();
+            }, 8000);
+            return;
+        }
+        
+        const msg = chatConversation[messageIndex];
+        
+        if (msg.type === 'bot') {
+            // Show typing indicator first
+            showTypingIndicator();
+            
+            // Simulate typing time based on message length
+            const typingTime = Math.max(600, msg.message.length * 25);
+            
+            chatReplayTimeout = setTimeout(() => {
+                removeTypingIndicator();
+                addChatMessage(msg.message, false);
+                messageIndex++;
+                
+                // Delay before next message
+                chatReplayTimeout = setTimeout(playNextMessage, 1200);
+            }, typingTime);
+        } else {
+            // User message appears instantly with read receipt
+            addChatMessage(msg.message, true);
+            messageIndex++;
+            
+            // Delay before bot responds
+            chatReplayTimeout = setTimeout(playNextMessage, 2200);
+        }
+    }
+    
+    // Start the conversation
+    playNextMessage();
+}
+
+// Start chat replay when page loads
+setTimeout(() => {
+    startChatReplay();
+}, 1000);
