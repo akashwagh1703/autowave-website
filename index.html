@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AutoWave - Automate Your WhatsApp Business. Engage customers 24/7 with AI-powered automation, lead generation, and seamless integrations.">
+    <title>AutoWave | WhatsApp Business Automation Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://via.placeholder.com/32" type="image/x-icon">
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="AutoWave - WhatsApp Automation for Business">
+    <meta property="og:description" content="Automate conversations, generate leads, and grow your business on WhatsApp 24/7.">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630">
+    <meta property="og:url" content="https://autowave.example.com">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <div class="logo-icon">AW</div>
+                    <div>
+                        <span class="logo-text">AutoWave</span>
+                        <span class="logo-sub">WhatsApp Automation</span>
+                    </div>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="#features">Features</a>
+                    <a href="#integrations">Integrations</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+                
+                <div class="nav-buttons">
+                    <button onclick="bookDemo()" class="btn btn-outline">Book a Demo</button>
+                    <button onclick="startTrial()" class="btn btn-primary">Start Free Trial</button>
+                </div>
+                
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="mobile-menu">
+        <a href="#features">Features</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <button onclick="bookDemo()" class="btn btn-outline">Book a Demo</button>
+        <button onclick="startTrial()" class="btn btn-primary">Start Free Trial</button>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-left">
+                <!-- Top Badge -->
+                <div class="badge">
+                    🚀 #1 WhatsApp Automation Platform for Businesses
+                </div>
+                
+                <!-- Headline -->
+                <h1 class="hero-title">
+                    Automate Your Business.<br>
+                    <span class="gradient-text">Engage Everywhere.</span>
+                </h1>
+                
+                <!-- Subtitle -->
+                <p class="hero-subtitle">
+                    AutoWave helps businesses automate WhatsApp conversations, generate leads, nurture customers and grow 24/7 on autopilot.
+                </p>
+                
+                <!-- Feature Chips -->
+                <div class="feature-chips">
+                    <div class="chip">⚡ Smart Automation</div>
+                    <div class="chip">👥 Lead Generation</div>
+                    <div class="chip">🕒 24/7 Support</div>
+                    <div class="chip">🔗 Easy Integration</div>
+                </div>
+                
+                <!-- CTAs -->
+                <div class="hero-ctas">
+                    <button onclick="startTrial()" class="btn btn-primary btn-large">
+                        Start Free Trial
+                        <span class="arrow">→</span>
+                    </button>
+                    <button onclick="bookDemo()" class="btn btn-secondary btn-large">
+                        <span class="play-icon">▶</span>
+                        Get a Demo
+                    </button>
+                </div>
+                
+                <!-- Trust Items -->
+                <div class="trust-items">
+                    <div class="trust-item">✓ No Credit Card</div>
+                    <div class="trust-item">✓ Setup in 2 Minutes</div>
+                    <div class="trust-item">✓ Cancel Anytime</div>
+                </div>
+            </div>
+            
+            <!-- Right Hero Visual -->
+            <div class="hero-right">
+                <!-- Dashboard Mockup -->
+                <div class="dashboard-mockup">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">AutoWave Dashboard</div>
+                    </div>
+                    
+                    <div class="dashboard-body">
+                        <!-- Sidebar -->
+                        <div class="dashboard-sidebar">
+                            <ul>
+                                <li class="active">Overview</li>
+                                <li>Conversations</li>
+                                <li>Contacts</li>
+                                <li>Campaigns</li>
+                                <li>Automation</li>
+                                <li>Analytics</li>
+                                <li>Integrations</li>
+                                <li>Settings</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Main Content -->
+                        <div class="dashboard-main">
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-label">Total Conversations</div>
+                                    <div class="stat-value">24,589</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">New Leads</div>
+                                    <div class="stat-value">8,426</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">Response Rate</div>
+                                    <div class="stat-value">92.6%</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">Active Campaigns</div>
+                                    <div class="stat-value">16</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Automation Flow -->
+                            <div class="automation-flow">
+                                <div class="flow-node">Welcome Message</div>
+                                <div class="flow-connector">→</div>
+                                <div class="flow-node">Send Catalog</div>
+                                <div class="flow-connector">→</div>
+                                <div class="flow-node">Booking</div>
+                                <div class="flow-connector">→</div>
+                                <div class="flow-node">Live Agent</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Floating WhatsApp Icon -->
+                <div class="floating-whatsapp">
+                    <div class="wa-icon">💬</div>
+                </div>
+                
+                <!-- WhatsApp Chat Mockup -->
+                <div class="chat-mockup">
+                    <div class="chat-header">
+                        <div>Your Business</div>
+                        <div class="chat-status">Online</div>
+                    </div>
+                    <div class="chat-messages">
+                        <div class="message bot">
+                            👋 Hi! Welcome to Your Business<br>
+                            How can we help you today?
+                        </div>
+                        <div class="message user">
+                            I want to know more about your services.
+                        </div>
+                        <div class="message bot">
+                            Sure! Here is our complete service list for you.
+                        </div>
+                    </div>
+                    <button class="chat-btn">View Services</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Wave -->
+        <div class="wave-container">
+            <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path fill="#00D084" fill-opacity="0.1" d="M0,64L48,80C96,96,192,128,288,122.7C384,117,480,75,576,69.3C672,64,768,96,864,101.3C960,107,1056,85,1152,80C1248,75,1344,85,1392,90.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- FEATURE HIGHLIGHTS -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Powerful Features to Scale Your Business</h2>
+                <p>Everything you need to automate and grow on WhatsApp</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Auto Respond</h3>
+                    <p>Instant replies to customer queries 24/7</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Capture More Leads</h3>
+                    <p>Collect, qualify &amp; manage leads automatically</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📢</div>
+                    <h3>Broadcast Campaigns</h3>
+                    <p>Send updates &amp; offers to unlimited customers</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Powerful Analytics</h3>
+                    <p>Track performance and optimize conversions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTEGRATIONS -->
+    <section id="integrations" class="integrations-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Seamless Integrations</h2>
+                <p>Connect AutoWave with your favorite tools</p>
+            </div>
+            
+            <div class="integrations-grid">
+                <div class="integration-card">Shopify</div>
+                <div class="integration-card">WordPress</div>
+                <div class="integration-card">WooCommerce</div>
+                <div class="integration-card">Zapier</div>
+                <div class="integration-card">HubSpot</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLOATING DEMO FORM -->
+    <div class="floating-demo">
+        <div class="demo-card">
+            <h3>Get a Demo</h3>
+            <p>Fill out the form and our team will get back to you shortly.</p>
+            
+            <form id="demo-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Business Email" required>
+                <input type="tel" placeholder="Phone Number" required>
+                <input type="text" placeholder="Business / Website">
+                <button type="submit" class="btn btn-primary">Request Demo</button>
+            </form>
+            
+            <p class="privacy">We respect your privacy. No spam, ever.</p>
+        </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="how-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>How AutoWave Works</h2>
+            </div>
+            <!-- Can be expanded with steps -->
+            <div class="steps">
+                <div>1. Connect WhatsApp</div>
+                <div>2. Build Automations</div>
+                <div>3. Engage &amp; Convert</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING placeholder -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2>Pricing</h2>
+            <p>Coming soon - Flexible plans for every business size</p>
+        </div>
+    </section>
+
+    <!-- FAQ placeholder -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <!-- Accordion can be added in JS -->
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-icon">AW</div>
+                    <span>AutoWave</span>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                
+                <div class="footer-copyright">
+                    © 2026 AutoWave. All rights reserved.
+                </div>
+                
+                <div class="social-icons">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">IN</a>
+                    <a href="#" class="social-icon">YT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
