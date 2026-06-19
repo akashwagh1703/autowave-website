@@ -26,13 +26,93 @@ setTimeout(() => {
     floatingForm.style.display = 'block';
 }, 5000);
 
-demoForm.addEventListener('submit', (e) => {
+// Form validation
+function validateForm(data) {
+    const errors = [];
+    
+    if (!data.name || data.name.length < 2) {
+        errors.push('Please enter a valid name (at least 2 characters)');
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!data.email || !emailRegex.test(data.email)) {
+        errors.push('Please enter a valid email address');
+    }
+    
+    const phoneRegex = /^[6-9]\d{9}$/;
+    const cleanPhone = data.phone.replace(/\D/g, '');
+    if (!data.phone || !phoneRegex.test(cleanPhone)) {
+        errors.push('Please enter a valid 10-digit phone number');
+    }
+    
+    if (!data.company || data.company.length < 2) {
+        errors.push('Please enter your business/website name');
+    }
+    
+    return errors;
+}
+
+// API configuration
+const API_URL = 'https://api.autowave.in/api/website/leads/capture-demo';
+
+demoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
     const formData = new FormData(demoForm);
-    console.log('Demo Request:', Object.fromEntries(formData));
-    alert('Thank you! Our team will contact you shortly.');
-    demoForm.reset();
-    floatingForm.style.display = 'none';
+    const data = Object.fromEntries(formData);
+    
+    // Add required fields
+    data.businessType = 'General Business';
+    data.source = 'website';
+    
+    // Validate form
+    const errors = validateForm(data);
+    if (errors.length > 0) {
+        alert(errors.join('\n'));
+        return;
+    }
+    
+    const submitButton = demoForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    
+    // Show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+            alert('Thank you! Our team will contact you shortly.');
+            demoForm.reset();
+            floatingForm.style.display = 'none';
+            
+            // Track conversion if Google Analytics is available
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'generate_lead', {
+                    'event_category': 'engagement',
+                    'event_label': 'demo_request'
+                });
+            }
+        } else {
+            alert(result.message || 'Something went wrong. Please try again.');
+        }
+    } catch (error) {
+        console.error('Demo request error:', error);
+        alert('Network error. Please try again or contact us directly at support@autowave.in');
+    } finally {
+        // Reset button state
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+    }
 });
 
 // Smooth Scroll
