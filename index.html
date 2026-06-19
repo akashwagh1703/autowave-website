@@ -11,6 +11,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <!-- Facebook Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'XXXXXXXXXXXXXXX');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/>
+    </noscript>
 </head>
 <body>
     <!-- Header -->
@@ -28,14 +54,12 @@
             </button>
             <nav class="nav" id="navMenu">
                 <a href="#features" class="nav-link">Features</a>
-                <a href="#integrations" class="nav-link">Integrations</a>
-                <a href="#how-it-works" class="nav-link">How It Works</a>
                 <a href="#pricing" class="nav-link">Pricing</a>
-                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#case-studies" class="nav-link">Success Stories</a>
             </nav>
             <div class="header-buttons">
-                <button class="btn btn-secondary" id="bookDemoHeader"><i class="fas fa-calendar"></i> Book a Demo</button>
-                <button class="btn btn-primary"><i class="fas fa-play-circle"></i> Start Free Trial</button>
+                <button class="btn btn-primary" id="bookDemoHeader">Book a Demo</button>
             </div>
         </div>
     </header>
@@ -63,45 +87,30 @@
                     <span class="gradient-text">Automate Your Business.</span><br>
                     <span>Engage Everywhere.</span>
                 </h1>
-                <p class="hero-subtitle">AutoWave helps businesses automate WhatsApp conversations, generate leads, nurture customers and grow 24/7 on autopilot.</p>
+                <p class="hero-subtitle">AutoWave helps businesses automate WhatsApp conversations, generate leads, and grow 24/7 on autopilot.</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-primary btn-lg">Start Free Trial</button>
+                    <a href="https://app.autowave.playltp.in/" class="btn btn-primary btn-lg">Start Free Trial</a>
                     <button class="btn btn-secondary-outline btn-lg">Get a Demo</button>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Bank-grade Security</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-clock"></i>
+                        <span>24/7 Support</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="fas fa-users"></i>
+                        <span>500+ Customers</span>
+                    </div>
                 </div>
             </div>
 
             <div class="hero-right">
-                <div class="floating-card card-1">
-                    <div class="card-header">
-                        <span class="card-title">AutoWave Dashboard</span>
-                        <div class="status-dots">
-                            <span></span><span></span><span></span>
-                        </div>
-                    </div>
-                    <div class="dashboard-grid">
-                        <div class="stat">
-                            <div class="stat-value">24,589</div>
-                            <div class="stat-label">Total Conversations</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">8,426</div>
-                            <div class="stat-label">New Leads</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">92.6%</div>
-                            <div class="stat-label">Response Rate</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">16</div>
-                            <div class="stat-label">Active Campaigns</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- <div class="floating-whatsapp">
-                    <i class="fab fa-whatsapp"></i>
-                </div> -->
-
                 <!-- WhatsApp Chat Replay -->
                 <div class="whatsapp-chat-replay">
                     <div class="chat-header">
@@ -161,11 +170,6 @@
                     <div class="feature-icon"><i class="fas fa-users"></i></div>
                     <h3>Capture More Leads</h3>
                     <p>Collect, qualify & manage leads automatically</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-megaphone"></i></div>
-                    <h3>Broadcast Campaigns</h3>
-                    <p>Send updates & offers to unlimited customers</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
@@ -329,46 +333,211 @@
         </svg>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-container">
+            <h2 class="section-title">Trusted by Growing Businesses</h2>
+            <p class="section-subtitle">See what our customers have to say about AutoWave</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="./content/autowave-icon.png" alt="Customer" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>Owner, Kumar Electronics</p>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"AutoWave transformed our customer service. We now handle 3x more inquiries without hiring more staff. The ROI was visible within the first month."</p>
+                    <div class="testimonial-metrics">
+                        <span><strong>3x</strong> More Responses</span>
+                        <span><strong>45%</strong> Higher Conversion</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="./content/autowave-icon.png" alt="Customer" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Founder, FashionBoutique</p>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"The automation features are incredible. Our abandoned cart recovery rate increased by 60% after implementing AutoWave. Highly recommended!"</p>
+                    <div class="testimonial-metrics">
+                        <span><strong>60%</strong> Cart Recovery</span>
+                        <span><strong>2.5x</strong> ROI</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="./content/autowave-icon.png" alt="Customer" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Amit Patel</h4>
+                            <p>Director, HealthCare Plus</p>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Patient appointment booking became seamless. Our staff can now focus on care instead of administrative tasks. Game-changer for healthcare."</p>
+                    <div class="testimonial-metrics">
+                        <span><strong>80%</strong> Time Saved</span>
+                        <span><strong>95%</strong> Patient Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="waveGrad6" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#00D084;stop-opacity:0.15" />
+                    <stop offset="100%" style="stop-color:#2563FF;stop-opacity:0.15" />
+                </linearGradient>
+            </defs>
+            <path d="M0,40 Q150,20 300,40 T600,40 T900,40 T1200,40 L1200,120 L0,120 Z" fill="url(#waveGrad6)"/>
+            <path d="M0,60 Q150,40 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z" fill="url(#waveGrad6)" opacity="0.5"/>
+        </svg>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="case-studies" id="case-studies">
+        <div class="section-container">
+            <h2 class="section-title">Success Stories</h2>
+            <p class="section-subtitle">See how businesses like yours achieved growth with AutoWave</p>
+            <div class="case-studies-grid">
+                <div class="case-study-card">
+                    <div class="case-study-image">
+                        <div class="case-study-icon"><i class="fas fa-shopping-cart"></i></div>
+                    </div>
+                    <div class="case-study-content">
+                        <h3>E-commerce Growth</h3>
+                        <p class="case-study-company">FashionBoutique - Retail</p>
+                        <p class="case-study-description">How a fashion retailer increased sales by 45% using WhatsApp automation for cart recovery and personalized recommendations.</p>
+                        <div class="case-study-results">
+                            <div class="result-item">
+                                <span class="result-value">45%</span>
+                                <span class="result-label">Sales Increase</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-value">3x</span>
+                                <span class="result-label">ROI</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary-outline btn-sm">Read Case Study</button>
+                    </div>
+                </div>
+                
+                <div class="case-study-card">
+                    <div class="case-study-image">
+                        <div class="case-study-icon"><i class="fas fa-heartbeat"></i></div>
+                    </div>
+                    <div class="case-study-content">
+                        <h3>Healthcare Efficiency</h3>
+                        <p class="case-study-company">HealthCare Plus - Medical</p>
+                        <p class="case-study-description">How a healthcare provider reduced appointment no-shows by 70% using automated reminders and follow-ups.</p>
+                        <div class="case-study-results">
+                            <div class="result-item">
+                                <span class="result-value">70%</span>
+                                <span class="result-label">Fewer No-Shows</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-value">80%</span>
+                                <span class="result-label">Time Saved</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary-outline btn-sm">Read Case Study</button>
+                    </div>
+                </div>
+                
+                <div class="case-study-card">
+                    <div class="case-study-image">
+                        <div class="case-study-icon"><i class="fas fa-utensils"></i></div>
+                    </div>
+                    <div class="case-study-content">
+                        <h3>Restaurant Orders</h3>
+                        <p class="case-study-company">SpiceGarden - Food & Beverage</p>
+                        <p class="case-study-description">How a restaurant chain increased online orders by 200% using WhatsApp for order confirmation and delivery updates.</p>
+                        <div class="case-study-results">
+                            <div class="result-item">
+                                <span class="result-value">200%</span>
+                                <span class="result-label">Order Growth</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-value">95%</span>
+                                <span class="result-label">Customer Satisfaction</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary-outline btn-sm">Read Case Study</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="waveGrad7" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#00D084;stop-opacity:0.15" />
+                    <stop offset="100%" style="stop-color:#2563FF;stop-opacity:0.15" />
+                </linearGradient>
+            </defs>
+            <path d="M0,40 Q150,20 300,40 T600,40 T900,40 T1200,40 L1200,120 L0,120 Z" fill="url(#waveGrad7)"/>
+            <path d="M0,60 Q150,40 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z" fill="url(#waveGrad7)" opacity="0.5"/>
+        </svg>
+    </section>
+
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
         <div class="section-container">
             <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <div class="trial-banner">
+                <i class="fas fa-gift"></i>
+                <span>Start with a <strong>14-day free trial</strong> - No credit card required</span>
+            </div>
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3>Starter</h3>
-                    <div class="price">$29<span>/month</span></div>
+                    <h3>Monthly</h3>
+                    <div class="price">₹499<span>/month</span></div>
                     <ul>
-                        <li><i class="fas fa-check"></i> Up to 1,000 conversations</li>
-                        <li><i class="fas fa-check"></i> Basic automation</li>
-                        <li><i class="fas fa-check"></i> Email support</li>
-                        <li><i class="fas fa-check"></i> 1 user account</li>
+                        <li><i class="fas fa-check"></i> Unlimited WhatsApp automation</li>
+                        <li><i class="fas fa-check"></i> Create new workflows</li>
+                        <li><i class="fas fa-check"></i> Use existing workflows</li>
+                        <li><i class="fas fa-check"></i> Advanced analytics dashboard</li>
+                        <li><i class="fas fa-check"></i> Any business type support</li>
                     </ul>
-                    <button class="btn btn-secondary-outline btn-block">Get Started</button>
+                    <a href="https://app.autowave.playltp.in/" class="btn btn-secondary-outline btn-block">Get Started</a>
                 </div>
                 <div class="pricing-card featured">
-                    <div class="badge-popular">Most Popular</div>
-                    <h3>Professional</h3>
-                    <div class="price">$99<span>/month</span></div>
+                    <div class="badge-popular">Best Value</div>
+                    <h3>Yearly</h3>
+                    <div class="price">₹4,999<span>/year</span></div>
+                    <div class="savings">Save ₹989/year</div>
                     <ul>
-                        <li><i class="fas fa-check"></i> Up to 10,000 conversations</li>
-                        <li><i class="fas fa-check"></i> Advanced automation</li>
+                        <li><i class="fas fa-check"></i> Unlimited WhatsApp automation</li>
+                        <li><i class="fas fa-check"></i> Create new workflows</li>
+                        <li><i class="fas fa-check"></i> Use existing workflows</li>
+                        <li><i class="fas fa-check"></i> Advanced analytics dashboard</li>
+                        <li><i class="fas fa-check"></i> Any business type support</li>
                         <li><i class="fas fa-check"></i> Priority support</li>
-                        <li><i class="fas fa-check"></i> 5 user accounts</li>
-                        <li><i class="fas fa-check"></i> Analytics dashboard</li>
                     </ul>
-                    <button class="btn btn-primary btn-block">Start Free Trial</button>
-                </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <div class="price">Custom</div>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Unlimited conversations</li>
-                        <li><i class="fas fa-check"></i> Custom automation</li>
-                        <li><i class="fas fa-check"></i> Dedicated support</li>
-                        <li><i class="fas fa-check"></i> Unlimited users</li>
-                        <li><i class="fas fa-check"></i> Advanced API access</li>
-                    </ul>
-                    <button class="btn btn-secondary-outline btn-block" id="bookDemoPricing"><i class="fas fa-phone"></i> Contact Sales</button>
+                    <a href="https://app.autowave.playltp.in/" class="btn btn-primary btn-block">Start Free Trial</a>
                 </div>
             </div>
         </div>
