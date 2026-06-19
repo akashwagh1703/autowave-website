@@ -52,8 +52,11 @@ function validateForm(data) {
     return errors;
 }
 
-// API configuration
-const API_URL = 'https://api.autowave.in/api/website/leads/capture-demo';
+// API configuration - update this to match your API deployment
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:3000'
+  : 'https://api.autowave.in';
+const API_URL = `${API_BASE_URL}/api/website/leads/capture-demo`;
 
 demoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -80,6 +83,9 @@ demoForm.addEventListener('submit', async (e) => {
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
     
     try {
+        console.log('Submitting to API:', API_URL);
+        console.log('Payload:', data);
+        
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
@@ -88,7 +94,9 @@ demoForm.addEventListener('submit', async (e) => {
             body: JSON.stringify(data)
         });
         
+        console.log('Response status:', response.status);
         const result = await response.json();
+        console.log('Response data:', result);
         
         if (response.ok && result.success) {
             alert('Thank you! Our team will contact you shortly.');
@@ -103,11 +111,13 @@ demoForm.addEventListener('submit', async (e) => {
                 });
             }
         } else {
-            alert(result.message || 'Something went wrong. Please try again.');
+            console.error('API Error:', result);
+            const errorMsg = result.message || result.error || 'Something went wrong. Please try again.';
+            alert(`Error: ${errorMsg}`);
         }
     } catch (error) {
         console.error('Demo request error:', error);
-        alert('Network error. Please try again or contact us directly at support@autowave.in');
+        alert(`Network error: ${error.message}. Please try again or contact us directly at support@autowave.in`);
     } finally {
         // Reset button state
         submitButton.disabled = false;
