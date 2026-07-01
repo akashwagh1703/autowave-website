@@ -53,7 +53,7 @@ function validateForm(data) {
 }
 
 // API configuration - update this to match your API deployment
-const API_BASE_URL = 'https://api.autowave.in';
+const API_BASE_URL = 'https://api.autowave.playltp.in';
 const API_URL = `${API_BASE_URL}/api/website/leads/capture-demo`;
 
 demoForm.addEventListener('submit', async (e) => {
