@@ -62,9 +62,28 @@ function validateForm(data) {
     return errors;
 }
 
-// API configuration - update this to match your API deployment
-const API_BASE_URL = 'https://api.autowave.playltp.in';
-const API_URL = `${API_BASE_URL}/api/website/leads/capture-demo`;
+// API configuration — bootstrap URL loads live config from /api/website/config
+const DEFAULT_API_BASE = 'https://api.autowave.playltp.in';
+let API_BASE_URL = DEFAULT_API_BASE;
+let API_URL = `${API_BASE_URL}/api/website/leads/capture-demo`;
+const IS_LOCAL = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+
+async function loadWebsiteConfig() {
+    try {
+        const res = await fetch(`${DEFAULT_API_BASE}/api/website/config`);
+        if (!res.ok) return;
+        const config = await res.json();
+        const apiUrl = String(config.apiUrl || '').replace(/\/$/, '');
+        if (apiUrl) {
+            API_BASE_URL = apiUrl;
+            API_URL = `${API_BASE_URL}/api/website/leads/capture-demo`;
+        }
+    } catch {
+        // Keep hardcoded fallback when config endpoint is unreachable
+    }
+}
+
+loadWebsiteConfig();
 
 demoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -99,9 +118,11 @@ demoForm.addEventListener('submit', async (e) => {
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
     
     try {
-        console.log('Submitting to API:', API_URL);
-        console.log('Payload:', data);
-        
+        if (IS_LOCAL) {
+            console.log('Submitting to API:', API_URL);
+            console.log('Payload:', data);
+        }
+
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
@@ -110,9 +131,21 @@ demoForm.addEventListener('submit', async (e) => {
             body: JSON.stringify(data)
         });
         
-        console.log('Response status:', response.status);
-        const result = await response.json();
-        console.log('Response data:', result);
+        if (IS_LOCAL) {
+            console.log('Response status:', response.status);
+        }
+
+        let result;
+        const contentType = response.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+            result = await response.json();
+        } else {
+            throw new Error(`Unexpected response (${response.status}). Please try again later.`);
+        }
+
+        if (IS_LOCAL) {
+            console.log('Response data:', result);
+        }
         
         if (response.ok && result.success) {
             alert('Thank you! Our team will contact you shortly.');
@@ -127,7 +160,9 @@ demoForm.addEventListener('submit', async (e) => {
                 });
             }
         } else {
-            console.error('API Error:', result);
+            if (IS_LOCAL) {
+                console.error('API Error:', result);
+            }
             const errorMsg = result.message || result.error || 'Something went wrong. Please try again.';
             alert(`Error: ${errorMsg}`);
         }
