@@ -26,26 +26,36 @@ setTimeout(() => {
     floatingForm.style.display = 'block';
 }, 5000);
 
-// Form validation
+// Form validation (runs on raw form field values before API mapping)
 function validateForm(data) {
     const errors = [];
     
-    if (!data.name || data.name.length < 2) {
+    const name = String(data.name ?? '').trim();
+    if (name.length < 2) {
         errors.push('Please enter a valid name (at least 2 characters)');
     }
     
+    const email = String(data.email ?? '').trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!data.email || !emailRegex.test(data.email)) {
+    if (!email || !emailRegex.test(email)) {
         errors.push('Please enter a valid email address');
     }
     
-    const phoneRegex = /^[6-9]\d{9}$/;
-    const cleanPhone = data.phone.replace(/\D/g, '');
-    if (!data.phone || !phoneRegex.test(cleanPhone)) {
-        errors.push('Please enter a valid 10-digit phone number');
+    const digits = String(data.phone ?? '').replace(/\D/g, '');
+    let mobile = digits;
+    if (mobile.length === 12 && mobile.startsWith('91')) {
+        mobile = mobile.slice(2);
+    } else if (mobile.length === 11 && mobile.startsWith('0')) {
+        mobile = mobile.slice(1);
+    } else if (mobile.length > 10) {
+        mobile = mobile.slice(-10);
+    }
+    if (!/^[6-9]\d{9}$/.test(mobile)) {
+        errors.push('Please enter a valid 10-digit Indian phone number');
     }
     
-    if (!data.company || data.company.length < 2) {
+    const company = String(data.company ?? data.companyName ?? '').trim();
+    if (company.length < 2) {
         errors.push('Please enter your business/website name');
     }
     
@@ -62,19 +72,24 @@ demoForm.addEventListener('submit', async (e) => {
     const formData = new FormData(demoForm);
     const data = Object.fromEntries(formData);
     
-    // Add required fields
-    data.businessType = 'General Business';
-    data.source = 'website';
-    data.companyName = data.company;
-    delete data.company;
-    data.phone = '+91' + data.phone.replace(/\D/g, '').slice(-10);
-    
-    // Validate form
+    // Validate before mapping fields for the API
     const errors = validateForm(data);
     if (errors.length > 0) {
         alert(errors.join('\n'));
         return;
     }
+    
+    // Map to API payload
+    data.businessType = 'General Business';
+    data.source = 'website';
+    data.companyName = String(data.company).trim();
+    delete data.company;
+    const phoneDigits = String(data.phone).replace(/\D/g, '');
+    let mobile = phoneDigits;
+    if (mobile.length === 12 && mobile.startsWith('91')) mobile = mobile.slice(2);
+    else if (mobile.length === 11 && mobile.startsWith('0')) mobile = mobile.slice(1);
+    else if (mobile.length > 10) mobile = mobile.slice(-10);
+    data.phone = '+91' + mobile;
     
     const submitButton = demoForm.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.innerHTML;
