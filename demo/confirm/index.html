@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Demo - AutoWave</title>
+    <link rel="icon" type="image/png" href="../content/autowave-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: Inter, system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 50%, #ffffff 100%);
+            padding: 24px;
+            color: #0f172a;
+        }
+        .card {
+            width: 100%;
+            max-width: 480px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+            padding: 40px 32px;
+            text-align: center;
+        }
+        .logo {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 16px;
+        }
+        h1 { font-size: 1.5rem; margin-bottom: 8px; }
+        p { color: #64748b; line-height: 1.6; margin-bottom: 16px; }
+        .status-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+        .status-icon.loading { background: #f1f5f9; color: #64748b; }
+        .status-icon.success { background: #ecfdf5; color: #059669; }
+        .status-icon.error { background: #fef2f2; color: #dc2626; }
+        .btn {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #059669, #0d9488);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .btn:hover { opacity: 0.92; }
+        .spinner {
+            width: 28px;
+            height: 28px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #059669;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="../content/autowave-icon.png" alt="AutoWave" class="logo" onerror="this.style.display='none'">
+        <div id="statusIcon" class="status-icon loading"><div class="spinner"></div></div>
+        <h1 id="title">Confirming your demo...</h1>
+        <p id="message">Please wait while we confirm your request.</p>
+        <a id="homeLink" class="btn" href="../index.html" style="display:none;">Back to AutoWave</a>
+    </div>
+
+    <script>
+        const DEFAULT_API_BASE = 'https://api.autowave.playltp.in';
+
+        function getTokenFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const queryToken = params.get('token');
+            if (queryToken) return queryToken.trim();
+
+            const parts = window.location.pathname.split('/').filter(Boolean);
+            const confirmIdx = parts.indexOf('confirm');
+            if (confirmIdx >= 0 && parts[confirmIdx + 1]) {
+                return parts[confirmIdx + 1].trim();
+            }
+            return null;
+        }
+
+        function showState(type, title, message) {
+            const icon = document.getElementById('statusIcon');
+            const homeLink = document.getElementById('homeLink');
+            icon.className = 'status-icon ' + type;
+            icon.textContent = type === 'success' ? '✓' : type === 'error' ? '!' : '';
+            if (type === 'loading') {
+                icon.innerHTML = '<div class="spinner"></div>';
+            }
+            document.getElementById('title').textContent = title;
+            document.getElementById('message').textContent = message;
+            homeLink.style.display = type === 'loading' ? 'none' : 'inline-block';
+        }
+
+        async function confirmDemo() {
+            const token = getTokenFromUrl();
+            if (!token) {
+                showState('error', 'Invalid link', 'This confirmation link is missing or invalid. Please contact support@autowave.in.');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${DEFAULT_API_BASE}/api/website/leads/confirm/${encodeURIComponent(token)}`);
+                let result;
+                const contentType = res.headers.get('content-type') || '';
+                if (contentType.includes('application/json')) {
+                    result = await res.json();
+                } else {
+                    throw new Error('Unexpected server response');
+                }
+
+                if (res.ok && result.success) {
+                    showState('success', 'Demo confirmed!', result.message || 'Our team will contact you shortly to schedule your demo.');
+                } else {
+                    showState('error', 'Confirmation failed', result.message || 'This link may be invalid or expired.');
+                }
+            } catch {
+                showState('error', 'Network error', 'Could not reach the server. Please try again later or email support@autowave.in.');
+            }
+        }
+
+        confirmDemo();
+    </script>
+</body>
+</html>

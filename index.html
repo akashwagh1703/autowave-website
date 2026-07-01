@@ -11,32 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
-    
-    <!-- Facebook Pixel -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'XXXXXXXXXXXXXXX');
-      fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/>
-    </noscript>
 </head>
 <body>
     <!-- Header -->
@@ -56,7 +30,6 @@
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#pricing" class="nav-link">Pricing</a>
                 <a href="#testimonials" class="nav-link">Testimonials</a>
-                <a href="#case-studies" class="nav-link">Success Stories</a>
             </nav>
             <div class="header-buttons">
                 <button class="btn btn-primary" id="bookDemoHeader">Book a Demo</button>
@@ -73,6 +46,9 @@
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Business Email" required>
             <input type="tel" name="phone" placeholder="Phone Number" required>
+            <select name="businessType" id="businessTypeSelect" class="demo-form-select" required>
+                <option value="">Select your industry</option>
+            </select>
             <input type="text" name="company" placeholder="Business / Website" required>
             <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Request Demo</button>
         </form>
@@ -89,8 +65,8 @@
                 </h1>
                 <p class="hero-subtitle">AutoWave helps businesses automate WhatsApp conversations, generate leads, and grow 24/7 on autopilot.</p>
                 <div class="hero-buttons">
-                    <a href="https://app.autowave.playltp.in/" class="btn btn-primary btn-lg">Start Free Trial</a>
-                    <button class="btn btn-secondary-outline btn-lg">Get a Demo</button>
+                    <a href="https://app.autowave.playltp.in/register" class="btn btn-primary btn-lg" id="startTrialHero">Start Free Trial</a>
+                    <button type="button" class="btn btn-secondary-outline btn-lg" id="bookDemoHero">Get a Demo</button>
                 </div>
 
                 <!-- Trust Badges -->
@@ -418,127 +394,17 @@
         </svg>
     </section>
 
-    <!-- Case Studies Section -->
-    <section class="case-studies" id="case-studies">
-        <div class="section-container">
-            <h2 class="section-title">Success Stories</h2>
-            <p class="section-subtitle">See how businesses like yours achieved growth with AutoWave</p>
-            <div class="case-studies-grid">
-                <div class="case-study-card">
-                    <div class="case-study-image">
-                        <div class="case-study-icon"><i class="fas fa-shopping-cart"></i></div>
-                    </div>
-                    <div class="case-study-content">
-                        <h3>E-commerce Growth</h3>
-                        <p class="case-study-company">FashionBoutique - Retail</p>
-                        <p class="case-study-description">How a fashion retailer increased sales by 45% using WhatsApp automation for cart recovery and personalized recommendations.</p>
-                        <div class="case-study-results">
-                            <div class="result-item">
-                                <span class="result-value">45%</span>
-                                <span class="result-label">Sales Increase</span>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-value">3x</span>
-                                <span class="result-label">ROI</span>
-                            </div>
-                        </div>
-                        <button class="btn btn-secondary-outline btn-sm">Read Case Study</button>
-                    </div>
-                </div>
-                
-                <div class="case-study-card">
-                    <div class="case-study-image">
-                        <div class="case-study-icon"><i class="fas fa-heartbeat"></i></div>
-                    </div>
-                    <div class="case-study-content">
-                        <h3>Healthcare Efficiency</h3>
-                        <p class="case-study-company">HealthCare Plus - Medical</p>
-                        <p class="case-study-description">How a healthcare provider reduced appointment no-shows by 70% using automated reminders and follow-ups.</p>
-                        <div class="case-study-results">
-                            <div class="result-item">
-                                <span class="result-value">70%</span>
-                                <span class="result-label">Fewer No-Shows</span>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-value">80%</span>
-                                <span class="result-label">Time Saved</span>
-                            </div>
-                        </div>
-                        <button class="btn btn-secondary-outline btn-sm">Read Case Study</button>
-                    </div>
-                </div>
-                
-                <div class="case-study-card">
-                    <div class="case-study-image">
-                        <div class="case-study-icon"><i class="fas fa-utensils"></i></div>
-                    </div>
-                    <div class="case-study-content">
-                        <h3>Restaurant Orders</h3>
-                        <p class="case-study-company">SpiceGarden - Food & Beverage</p>
-                        <p class="case-study-description">How a restaurant chain increased online orders by 200% using WhatsApp for order confirmation and delivery updates.</p>
-                        <div class="case-study-results">
-                            <div class="result-item">
-                                <span class="result-value">200%</span>
-                                <span class="result-label">Order Growth</span>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-value">95%</span>
-                                <span class="result-label">Customer Satisfaction</span>
-                            </div>
-                        </div>
-                        <button class="btn btn-secondary-outline btn-sm">Read Case Study</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad7" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#00D084;stop-opacity:0.15" />
-                    <stop offset="100%" style="stop-color:#2563FF;stop-opacity:0.15" />
-                </linearGradient>
-            </defs>
-            <path d="M0,40 Q150,20 300,40 T600,40 T900,40 T1200,40 L1200,120 L0,120 Z" fill="url(#waveGrad7)"/>
-            <path d="M0,60 Q150,40 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z" fill="url(#waveGrad7)" opacity="0.5"/>
-        </svg>
-    </section>
-
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
         <div class="section-container">
             <h2 class="section-title">Simple, Transparent Pricing</h2>
-            <div class="trial-banner">
+            <div class="trial-banner" id="trialBanner">
                 <i class="fas fa-gift"></i>
                 <span>Start with a <strong>14-day free trial</strong> - No credit card required</span>
+                <button type="button" class="btn btn-secondary-outline btn-sm" id="bookDemoPricing">Book a Demo</button>
             </div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Monthly</h3>
-                    <div class="price">₹499<span>/month</span></div>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Unlimited WhatsApp automation</li>
-                        <li><i class="fas fa-check"></i> Create new workflows</li>
-                        <li><i class="fas fa-check"></i> Use existing workflows</li>
-                        <li><i class="fas fa-check"></i> Advanced analytics dashboard</li>
-                        <li><i class="fas fa-check"></i> Any business type support</li>
-                    </ul>
-                    <a href="https://app.autowave.playltp.in/" class="btn btn-secondary-outline btn-block">Get Started</a>
-                </div>
-                <div class="pricing-card featured">
-                    <div class="badge-popular">Best Value</div>
-                    <h3>Yearly</h3>
-                    <div class="price">₹4,999<span>/year</span></div>
-                    <div class="savings">Save ₹989/year</div>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Unlimited WhatsApp automation</li>
-                        <li><i class="fas fa-check"></i> Create new workflows</li>
-                        <li><i class="fas fa-check"></i> Use existing workflows</li>
-                        <li><i class="fas fa-check"></i> Advanced analytics dashboard</li>
-                        <li><i class="fas fa-check"></i> Any business type support</li>
-                        <li><i class="fas fa-check"></i> Priority support</li>
-                    </ul>
-                    <a href="https://app.autowave.playltp.in/" class="btn btn-primary btn-block">Start Free Trial</a>
-                </div>
+            <div class="pricing-grid" id="pricingGrid">
+                <!-- Pricing cards loaded from /api/website/config -->
             </div>
         </div>
         <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -610,8 +476,8 @@
             <h2>Ready to Transform Your Business?</h2>
             <p>Join thousands of companies automating WhatsApp with AutoWave</p>
             <div class="cta-buttons">
-                <button class="btn btn-primary btn-lg"><i class="fas fa-play-circle"></i> Start Your Free Trial</button>
-                <button class="btn btn-secondary-outline btn-lg" id="bookDemoCTA"><i class="fas fa-calendar"></i> Schedule a Demo</button>
+                <a href="https://app.autowave.playltp.in/register" class="btn btn-primary btn-lg" id="startTrialCTA"><i class="fas fa-play-circle"></i> Start Your Free Trial</a>
+                <button type="button" class="btn btn-secondary-outline btn-lg" id="bookDemoCTA"><i class="fas fa-calendar"></i> Schedule a Demo</button>
             </div>
         </div>
     </section>
@@ -627,15 +493,8 @@
                 <div class="footer-center">
                     <p>© 2026 AutoWave. All rights reserved.</p>
                     <div class="footer-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
+                        <a href="https://app.autowave.playltp.in/privacy">Privacy Policy</a>
                     </div>
-                </div>
-                <div class="footer-right">
-                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>

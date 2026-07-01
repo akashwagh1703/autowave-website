@@ -234,7 +234,8 @@ body {
     margin-bottom: 12px;
 }
 
-.demo-form input {
+.demo-form input,
+.demo-form select {
     padding: 10px 12px;
     border: 1px solid var(--border);
     border-radius: 6px;
@@ -244,7 +245,8 @@ body {
     background: var(--background);
 }
 
-.demo-form input:focus {
+.demo-form input:focus,
+.demo-form select:focus {
     outline: none;
     border-color: var(--primary-green);
     background: white;
@@ -1102,6 +1104,12 @@ body {
 
 .trial-banner strong {
     font-weight: 700;
+}
+
+.trial-banner .btn {
+    margin-left: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .pricing-grid {
