@@ -65,6 +65,9 @@ demoForm.addEventListener('submit', async (e) => {
     // Add required fields
     data.businessType = 'General Business';
     data.source = 'website';
+    data.companyName = data.company;
+    delete data.company;
+    data.phone = '+91' + data.phone.replace(/\D/g, '').slice(-10);
     
     // Validate form
     const errors = validateForm(data);
