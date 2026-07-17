@@ -53,7 +53,7 @@ To test against a local API, run `micro-saas-api` on port 3000 and ensure `CORS_
 
 ## Deploy
 
-1. Upload all files to the web root (`index.html`, `robots.txt`, `sitemap.xml`, `seo.js`, CSS/JS, `content/` including `og-image.svg`, `demo/`)
+1. Upload all files to the web root (`index.html`, `robots.txt`, `sitemap.xml`, `seo.js`, CSS/JS, `content/` including **`autowave-marketing.png`** and **`autowave-icon.png`**, `demo/`)
 2. Ensure `content/autowave-icon.png` is present
 3. Confirm the site origin matches `CORS_ORIGINS` on the API
 4. In [Google Search Console](https://search.google.com/search-console), submit `https://autowave.playltp.in/sitemap.xml`
@@ -74,7 +74,8 @@ No environment file is required on the website itself — configuration is loade
 | `seo.js` | Canonical / OG URLs from API `websiteUrl`; pricing in schema |
 | `robots.txt` | Crawler rules + sitemap pointer |
 | `sitemap.xml` | Homepage URL for search engines |
-| `content/og-image.svg` | Social share image (optional: add `og-image.png` 1200×630 for best Facebook/LinkedIn previews) |
+| `content/autowave-marketing.png` | Open Graph / Twitter / schema marketing image |
+| `content/autowave-icon.png` | Favicon, apple-touch-icon, schema logo, UI branding |
 | `demo/confirm/` | Demo confirmation page |
 
 ## SEO

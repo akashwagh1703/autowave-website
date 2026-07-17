@@ -18,16 +18,18 @@
     <meta property="og:title" content="AutoWave — WhatsApp Appointment Booking">
     <meta property="og:description" content="Guided WhatsApp bookings with owner approval, live availability, and instant customer confirmations.">
     <meta property="og:url" content="https://autowave.playltp.in/" id="ogUrl">
-    <meta property="og:image" content="https://autowave.playltp.in/content/og-image.svg" id="ogImage">
-    <meta property="og:image:alt" content="AutoWave WhatsApp appointment booking platform">
+    <meta property="og:image" content="https://autowave.playltp.in/content/autowave-marketing.png" id="ogImage">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="AutoWave — WhatsApp appointment booking for salons and clinics">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AutoWave — WhatsApp Appointment Booking">
     <meta name="twitter:description" content="Customers book in WhatsApp. You approve. They get confirmed automatically.">
-    <meta name="twitter:image" content="https://autowave.playltp.in/content/og-image.svg" id="twitterImage">
+    <meta name="twitter:image" content="https://autowave.playltp.in/content/autowave-marketing.png" id="twitterImage">
+    <meta name="twitter:image:alt" content="AutoWave marketing preview">
 
-    <link rel="icon" type="image/png" href="./content/autowave-icon.png">
+    <link rel="icon" type="image/png" href="./content/autowave-icon.png" sizes="any">
     <link rel="apple-touch-icon" href="./content/autowave-icon.png">
     <meta name="theme-color" content="#0B1F44">
     <meta name="application-name" content="AutoWave">
@@ -52,7 +54,12 @@
           "@id": "https://autowave.playltp.in/#organization",
           "name": "AutoWave",
           "url": "https://autowave.playltp.in/",
-          "logo": "https://autowave.playltp.in/content/autowave-icon.png",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://autowave.playltp.in/content/autowave-icon.png",
+            "caption": "AutoWave logo"
+          },
+          "image": "https://autowave.playltp.in/content/autowave-marketing.png",
           "email": "support@autowave.in",
           "description": "WhatsApp appointment booking platform for service businesses with owner approval on every booking.",
           "areaServed": { "@type": "Country", "name": "India" }
@@ -71,6 +78,7 @@
           "applicationCategory": "BusinessApplication",
           "operatingSystem": "Web, Android, iOS",
           "description": "WhatsApp and Instagram booking flows with owner approval, scheduling, and customer notifications.",
+          "image": "https://autowave.playltp.in/content/autowave-marketing.png",
           "offers": {
             "@type": "Offer",
             "price": "499",
