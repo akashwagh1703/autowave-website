@@ -72,7 +72,7 @@
             const app = data['@graph']?.find((n) => n['@type'] === 'SoftwareApplication');
             if (app) {
                 app.image = marketingUrl;
-                if (config?.pricing?.plans?.length) {
+                if (window.AUTOWAVE_SHOW_PRICING !== false && config?.pricing?.plans?.length) {
                     const monthly = config.pricing.plans.find((p) => p.id === 'monthly') || config.pricing.plans[0];
                     if (monthly?.price != null) {
                         app.offers = {
@@ -82,6 +82,8 @@
                             description: `${trialDays}-day free trial available`,
                         };
                     }
+                } else if (app.offers) {
+                    delete app.offers;
                 }
             }
 

@@ -79,12 +79,6 @@
           "operatingSystem": "Web, Android, iOS",
           "description": "WhatsApp and Instagram booking flows with owner approval, scheduling, and customer notifications.",
           "image": "https://autowave.playltp.in/content/autowave-marketing.png",
-          "offers": {
-            "@type": "Offer",
-            "price": "499",
-            "priceCurrency": "INR",
-            "description": "Plans from monthly billing with free trial available"
-          },
           "provider": { "@id": "https://autowave.playltp.in/#organization" }
         },
         {
@@ -116,7 +110,7 @@
     }
     </script>
 </head>
-<body class="aw-landing">
+<body class="aw-landing aw-pricing-off">
     <a class="aw-skip" href="#main">Skip to content</a>
     <header class="aw-header" id="siteHeader">
         <div class="aw-container aw-header__row">
@@ -134,7 +128,7 @@
                 <a href="#how" class="nav-link">How it works</a>
                 <a href="#architecture" class="nav-link">Platform</a>
                 <a href="#features" class="nav-link">Features</a>
-                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#pricing" class="nav-link aw-pricing-nav">Pricing</a>
                 <div class="aw-nav__mobile-actions">
                     <a href="https://app.autowave.playltp.in/login" class="btn btn-secondary-outline btn-block" id="loginNavMobile">Sign in</a>
                     <button type="button" class="btn btn-secondary-outline btn-block" id="bookDemoNavMobile">Book a demo</button>
@@ -305,7 +299,7 @@
             </div>
         </section>
 
-        <section class="aw-section pricing pricing-compact aw-reveal" id="pricing">
+        <section class="aw-section pricing pricing-compact aw-reveal aw-pricing-block" id="pricing" hidden aria-hidden="true">
             <div class="aw-container">
                 <header class="aw-section-head">
                     <p class="aw-eyebrow aw-eyebrow--center">Plans</p>
@@ -348,7 +342,7 @@
                     <li><a href="#architecture">Platform</a></li>
                     <li><a href="#how">How it works</a></li>
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
+                    <li class="aw-pricing-nav"><a href="#pricing">Pricing</a></li>
                 </ul>
             </div>
             <div>

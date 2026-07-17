@@ -168,6 +168,18 @@
     opacity: 1;
 }
 
+/* Pricing hidden site-wide (toggle via body.aw-pricing-off / SHOW_PRICING in script.js) */
+body.aw-pricing-off .aw-pricing-block,
+body.aw-pricing-off .aw-pricing-nav,
+body.aw-pricing-off #pricing {
+    display: none !important;
+}
+
+.aw-pricing-block[hidden],
+.aw-pricing-nav[hidden] {
+    display: none !important;
+}
+
 /* Pricing loading */
 .aw-landing #pricingGrid.is-loading {
     display: grid;

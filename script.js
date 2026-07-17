@@ -83,6 +83,26 @@ function privacyUrl() {
     return `${portalBase()}/privacy`;
 }
 
+/** When false, pricing section, nav links, and ₹ amounts stay hidden on the marketing site. */
+const SHOW_PRICING = false;
+window.AUTOWAVE_SHOW_PRICING = SHOW_PRICING;
+
+function applyPricingVisibility() {
+    if (SHOW_PRICING) return;
+    document.body.classList.add('aw-pricing-off');
+    const pricingSection = document.getElementById('pricing');
+    if (pricingSection) {
+        pricingSection.hidden = true;
+        pricingSection.setAttribute('aria-hidden', 'true');
+    }
+    document.querySelectorAll('.aw-pricing-nav, .aw-pricing-block').forEach((el) => {
+        el.hidden = true;
+        el.setAttribute('aria-hidden', 'true');
+    });
+}
+
+applyPricingVisibility();
+
 function formatInr(amount) {
     return `₹${Number(amount).toLocaleString('en-IN')}`;
 }
@@ -93,7 +113,7 @@ const DEFAULT_FALLBACK_PRICING = {
         {
             id: 'monthly',
             name: 'Monthly',
-            price: 499,
+            price: 99,
             currency: 'INR',
             periodLabel: '/month',
             featured: false,
@@ -108,12 +128,12 @@ const DEFAULT_FALLBACK_PRICING = {
         {
             id: 'yearly',
             name: 'Yearly',
-            price: 4999,
+            price: 999,
             currency: 'INR',
             periodLabel: '/year',
             featured: true,
             badge: 'Best Value',
-            savings: 'Save ₹989/year',
+            savings: 'Save ₹189/year',
             features: [
                 'Unlimited WhatsApp automation',
                 'Create & use workflows',
@@ -253,6 +273,10 @@ function applyTrialDaysCopy(days) {
 }
 
 function renderPricing(config) {
+    if (!SHOW_PRICING) {
+        document.getElementById('pricingGrid')?.classList.remove('is-loading');
+        return;
+    }
     const grid = document.getElementById('pricingGrid');
     const banner = document.getElementById('trialBanner');
     const pricing = config?.pricing;
@@ -308,13 +332,29 @@ function renderPricing(config) {
 }
 
 function buildChatConversation(config) {
+    const trialDays = config?.pricing?.trial?.days ?? 14;
+
+    if (!SHOW_PRICING) {
+        return [
+            { type: 'user', message: 'Hi' },
+            { type: 'bot', message: 'Hi there! 👋' },
+            { type: 'bot', message: 'Welcome to AutoWave!\n\nWe help businesses automate WhatsApp conversations.' },
+            { type: 'user', message: 'That sounds interesting.\n\nWhat can it do for my business?' },
+            { type: 'bot', message: 'Great question! 🎯\n\nHere\'s what AutoWave does:' },
+            { type: 'bot', message: '✅ Respond to inquiries 24/7\n\n✅ Capture & qualify leads\n\n✅ Send catalogs & offers\n\n✅ Schedule appointments' },
+            { type: 'user', message: 'Can I try before buying?' },
+            { type: 'bot', message: `Absolutely! 🚀\n\nWe offer a ${trialDays}-day FREE trial.\n\nNo credit card required!` },
+            { type: 'bot', message: 'You can set up in just 2 minutes and start automating right away.' },
+            { type: 'bot', message: 'Ready to get started? 🚀\n\nClick "Start Free Trial" on the page.\n\nOr book a demo with our team.' },
+        ];
+    }
+
     const plans = config?.pricing?.plans || [];
     const monthly = plans.find((p) => p.id === 'monthly') || plans[0];
     const yearly = plans.find((p) => p.id === 'yearly') || plans[1];
-    const trialDays = config?.pricing?.trial?.days ?? 14;
 
-    const monthlyPrice = monthly ? formatInr(monthly.price) : '₹499';
-    const yearlyPrice = yearly ? formatInr(yearly.price) : '₹4,999';
+    const monthlyPrice = monthly ? formatInr(monthly.price) : '₹99';
+    const yearlyPrice = yearly ? formatInr(yearly.price) : '₹999';
     const yearlyLabel = yearly?.periodLabel || '/year';
 
     return [
