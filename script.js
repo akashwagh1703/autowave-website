@@ -11,6 +11,9 @@ mobileMenuToggle.addEventListener('click', () => {
 const floatingForm = document.getElementById('floatingForm');
 const formClose = document.getElementById('formClose');
 const demoForm = document.getElementById('demoForm');
+const demoFormSuccess = document.getElementById('demoFormSuccess');
+const demoFormTitle = document.getElementById('demoFormTitle');
+const demoFormDesc = document.getElementById('demoFormDesc');
 const DISMISS_KEY = 'autowave_demo_form_dismissed';
 
 const DEFAULT_API_BASE = 'https://api.autowave.playltp.in';
@@ -130,7 +133,51 @@ const DEFAULT_FALLBACK_INDUSTRIES = [
     { id: 'other', label: 'Other Business' },
 ];
 
+function resetDemoFormPanel() {
+    if (demoForm) {
+        demoForm.hidden = false;
+        demoForm.reset();
+    }
+    if (demoFormSuccess) demoFormSuccess.hidden = true;
+    if (demoFormTitle) demoFormTitle.hidden = false;
+    if (demoFormDesc) demoFormDesc.hidden = false;
+    showDemoFormError('');
+    floatingForm?.classList.remove('is-success', 'is-closing');
+}
+
+function closeDemoForm() {
+    if (!floatingForm) return;
+    floatingForm.classList.add('is-closing');
+    window.setTimeout(() => {
+        floatingForm.style.display = 'none';
+        floatingForm.classList.remove('is-visible', 'is-success', 'is-closing');
+        resetDemoFormPanel();
+    }, 380);
+}
+
+function showDemoFormSuccess(message) {
+    const text =
+        message ||
+        'Our team will reach out within one business day.';
+    const msgEl = document.getElementById('demoSuccessMessage');
+    if (msgEl) msgEl.textContent = text;
+
+    showDemoFormError('');
+    if (demoForm) demoForm.hidden = true;
+    if (demoFormTitle) demoFormTitle.hidden = true;
+    if (demoFormDesc) demoFormDesc.hidden = true;
+    if (demoFormSuccess) demoFormSuccess.hidden = false;
+    floatingForm?.classList.add('is-success');
+    sessionStorage.setItem(DISMISS_KEY, '1');
+
+    window.setTimeout(() => {
+        closeDemoForm();
+    }, 3400);
+}
+
 function openDemoForm() {
+    if (!floatingForm) return;
+    resetDemoFormPanel();
     floatingForm.style.display = 'block';
     floatingForm.classList.add('is-visible');
 }
@@ -145,10 +192,9 @@ document.querySelectorAll(
     });
 });
 
-formClose.addEventListener('click', () => {
-    floatingForm.style.display = 'none';
-    floatingForm.classList.remove('is-visible');
+formClose?.addEventListener('click', () => {
     sessionStorage.setItem(DISMISS_KEY, '1');
+    closeDemoForm();
 });
 
 setTimeout(() => {
@@ -438,13 +484,12 @@ demoForm.addEventListener('submit', async (e) => {
             console.log('Response status:', response.status, result);
         }
 
-        if (response.ok && result.success) {
-            showDemoFormError('');
-            alert(result.message || 'Thank you! Our team will contact you shortly.');
-            demoForm.reset();
-            floatingForm.style.display = 'none';
-            floatingForm.classList.remove('is-visible');
-            sessionStorage.setItem(DISMISS_KEY, '1');
+        const isSuccess =
+            response.ok &&
+            (result.success === true || typeof result.leadId === 'number');
+
+        if (isSuccess) {
+            showDemoFormSuccess(result.message);
 
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'generate_lead', {

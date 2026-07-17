@@ -151,8 +151,8 @@
 
     <div class="floating-form aw-demo-panel" id="floatingForm">
         <button class="form-close" id="formClose" type="button" aria-label="Close"><i class="fas fa-times"></i></button>
-        <h3 class="form-title">Book a demo</h3>
-        <p class="form-desc">Our team will show you setup for your business type.</p>
+        <h3 class="form-title" id="demoFormTitle">Book a demo</h3>
+        <p class="form-desc" id="demoFormDesc">Our team will show you setup for your business type.</p>
         <form class="demo-form" id="demoForm">
             <input type="text" name="name" placeholder="Full name" required>
             <input type="email" name="email" placeholder="Work email" required>
@@ -163,6 +163,11 @@
             <button type="submit" class="btn btn-primary btn-block">Request demo</button>
             <p class="aw-form-note">We typically respond within one business day. No spam.</p>
         </form>
+        <div class="demo-form-success" id="demoFormSuccess" hidden aria-live="polite">
+            <div class="demo-success-icon" aria-hidden="true"><i class="fas fa-check"></i></div>
+            <h3 class="demo-success-title">Thank you!</h3>
+            <p class="demo-success-text" id="demoSuccessMessage">Our team will reach out within one business day.</p>
+        </div>
     </div>
 
     <main id="main">

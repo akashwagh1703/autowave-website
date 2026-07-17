@@ -214,6 +214,113 @@
     animation: awFormIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.aw-landing .floating-form.is-closing {
+    animation: awFormOut 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes awFormOut {
+    to {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+}
+
+.aw-landing .floating-form.is-success {
+    box-shadow: 0 24px 60px rgba(0, 208, 132, 0.18);
+}
+
+.demo-form-success {
+    text-align: center;
+    padding: 12px 4px 8px;
+}
+
+.demo-form-success[hidden] {
+    display: none;
+}
+
+.demo-success-icon {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #00d084, #00a86b);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 12px 28px rgba(0, 208, 132, 0.35);
+    animation: demoSuccessPop 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.demo-success-icon::after {
+    content: '';
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 208, 132, 0.45);
+    animation: demoSuccessRing 0.9s ease-out 0.15s forwards;
+    opacity: 0;
+}
+
+.demo-form-success {
+    position: relative;
+}
+
+.demo-success-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--aw-navy, #0b1f44);
+    margin: 0 0 8px;
+    animation: demoSuccessFadeUp 0.45s ease 0.12s both;
+}
+
+.demo-success-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--aw-muted, #64748b);
+    margin: 0;
+    animation: demoSuccessFadeUp 0.45s ease 0.22s both;
+}
+
+@keyframes demoSuccessPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+    70% {
+        transform: scale(1.08);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes demoSuccessRing {
+    0% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.55);
+    }
+}
+
+@keyframes demoSuccessFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 @keyframes awFormIn {
     from {
         opacity: 0;
