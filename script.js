@@ -274,6 +274,7 @@ async function loadWebsiteConfig() {
         populateIndustrySelect(config.industries);
         renderPricing(config);
         applyTrialLinks();
+        if (typeof applyWebsiteSeo === 'function') applyWebsiteSeo(config);
         const trialDays = config?.pricing?.trial?.days ?? 14;
         applyTrialDaysCopy(trialDays);
 

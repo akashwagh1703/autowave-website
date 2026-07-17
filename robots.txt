@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://autowave.playltp.in/sitemap.xml
+
+# App and API are hosted separately; do not index demo confirm tokens as primary content
+Disallow: /demo/confirm/

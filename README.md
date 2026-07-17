@@ -53,9 +53,10 @@ To test against a local API, run `micro-saas-api` on port 3000 and ensure `CORS_
 
 ## Deploy
 
-1. Upload all files to the web root (`index.html`, `landing-base.css`, `landing-pro.css`, `landing-polish.css`, `script.js`, `landing-motion.js`, `content/`, `demo/`)
+1. Upload all files to the web root (`index.html`, `robots.txt`, `sitemap.xml`, `seo.js`, CSS/JS, `content/` including `og-image.svg`, `demo/`)
 2. Ensure `content/autowave-icon.png` is present
 3. Confirm the site origin matches `CORS_ORIGINS` on the API
+4. In [Google Search Console](https://search.google.com/search-console), submit `https://autowave.playltp.in/sitemap.xml`
 
 No environment file is required on the website itself — configuration is loaded from the API at runtime.
 
@@ -70,8 +71,25 @@ No environment file is required on the website itself — configuration is loade
 | `landing-motion.js` | WhatsApp demo animation, hero tilt |
 | `script.js` | Config load, demo form, pricing render |
 | `style.css` | Legacy (not used by current `index.html`) |
-| `content/` | Logo and image assets |
+| `seo.js` | Canonical / OG URLs from API `websiteUrl`; pricing in schema |
+| `robots.txt` | Crawler rules + sitemap pointer |
+| `sitemap.xml` | Homepage URL for search engines |
+| `content/og-image.svg` | Social share image (optional: add `og-image.png` 1200×630 for best Facebook/LinkedIn previews) |
 | `demo/confirm/` | Demo confirmation page |
+
+## SEO
+
+The landing page includes:
+
+- **Title & meta description** tuned for WhatsApp booking keywords
+- **Canonical URL**, `robots` index/follow, `lang="en-IN"`
+- **Open Graph** and **Twitter Card** tags
+- **JSON-LD**: Organization, WebSite, SoftwareApplication, HowTo
+- **`robots.txt`** and **`sitemap.xml`** (update domain in both if not using `autowave.playltp.in`)
+- **`seo.js`** updates canonical/OG from API `websiteUrl` and refreshes offer price in schema when pricing loads
+- Demo confirm page uses **`noindex`** so token URLs are not indexed
+
+After deploy, verify with [Rich Results Test](https://search.google.com/test/rich-results) and share debuggers (Facebook Sharing Debugger, Twitter Card Validator).
 
 ## Analytics
 
