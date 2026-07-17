@@ -120,6 +120,21 @@ body.aw-landing {
     color: #94a3b8;
 }
 
+.aw-landing .aw-form-error {
+    font-size: 13px;
+    line-height: 1.45;
+    color: #b91c1c;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 0;
+}
+
+.aw-landing .aw-form-error[hidden] {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .aw-landing .floating-form {
         bottom: 80px;

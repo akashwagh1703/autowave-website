@@ -156,9 +156,10 @@
         <form class="demo-form" id="demoForm">
             <input type="text" name="name" placeholder="Full name" required>
             <input type="email" name="email" placeholder="Work email" required>
-            <input type="tel" name="phone" placeholder="Phone" required>
+            <input type="tel" name="phone" placeholder="10-digit mobile (e.g. 9876543210)" inputmode="numeric" autocomplete="tel" required>
             <select name="businessType" id="businessTypeSelect" required><option value="">Business type</option></select>
             <input type="text" name="company" placeholder="Business name" required>
+            <p class="aw-form-error" id="demoFormError" role="alert" hidden></p>
             <button type="submit" class="btn btn-primary btn-block">Request demo</button>
             <p class="aw-form-note">We typically respond within one business day. No spam.</p>
         </form>

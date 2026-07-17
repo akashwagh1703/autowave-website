@@ -24,6 +24,46 @@ let chatReplayTimeout = null;
 
 const IS_LOCAL = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
+function applyApiBaseFromConfig(config) {
+    let base = String(config?.apiUrl || DEFAULT_API_BASE).trim().replace(/\/$/, '');
+    if (base.toLowerCase().endsWith('/api')) {
+        base = base.slice(0, -4);
+    }
+    API_BASE_URL = base;
+    API_URL = `${API_BASE_URL}/api/website/leads/capture-demo`;
+}
+
+function showDemoFormError(message) {
+    const el = document.getElementById('demoFormError');
+    if (!el) return;
+    if (message) {
+        el.textContent = message;
+        el.hidden = false;
+    } else {
+        el.textContent = '';
+        el.hidden = true;
+    }
+}
+
+async function parseResponseBody(response) {
+    const text = await response.text();
+    if (!text) return {};
+    try {
+        return JSON.parse(text);
+    } catch {
+        return { message: text.slice(0, 240) };
+    }
+}
+
+function formatApiError(result, status) {
+    if (result?.errors && typeof result.errors === 'object') {
+        const parts = Object.values(result.errors).flat().filter(Boolean);
+        if (parts.length) return parts.join('\n');
+    }
+    if (result?.message) return String(result.message);
+    return `Request failed (${status}). Please try again or email support@autowave.in`;
+}
+
 function portalBase() {
     return String(websiteConfig?.portalUrl || DEFAULT_PORTAL_URL).replace(/\/$/, '');
 }
@@ -120,6 +160,10 @@ setTimeout(() => {
 function populateIndustrySelect(industries) {
     const select = document.getElementById('businessTypeSelect');
     if (!select || !Array.isArray(industries)) return;
+
+    while (select.options.length > 1) {
+        select.remove(1);
+    }
 
     industries.forEach((industry) => {
         const option = document.createElement('option');
@@ -256,6 +300,7 @@ async function loadWebsiteConfig() {
     try {
         const res = await fetch(`${DEFAULT_API_BASE}/api/website/config`);
         if (!res.ok) {
+            applyApiBaseFromConfig({ apiUrl: DEFAULT_API_BASE });
             populateIndustrySelect(DEFAULT_FALLBACK_INDUSTRIES);
             renderPricing({ pricing: DEFAULT_FALLBACK_PRICING });
             applyTrialDaysCopy(DEFAULT_FALLBACK_PRICING.trial.days);
@@ -267,8 +312,9 @@ async function loadWebsiteConfig() {
 
         const apiUrl = String(config.apiUrl || '').replace(/\/$/, '');
         if (apiUrl) {
-            API_BASE_URL = apiUrl;
-            API_URL = `${API_BASE_URL}/api/website/leads/capture-demo`;
+            applyApiBaseFromConfig(config);
+        } else {
+            applyApiBaseFromConfig({ apiUrl: DEFAULT_API_BASE });
         }
 
         populateIndustrySelect(config.industries);
@@ -284,6 +330,7 @@ async function loadWebsiteConfig() {
             setTimeout(startChatReplay, 1000);
         }
     } catch {
+        applyApiBaseFromConfig({ apiUrl: DEFAULT_API_BASE });
         populateIndustrySelect(DEFAULT_FALLBACK_INDUSTRIES);
         renderPricing({ pricing: DEFAULT_FALLBACK_PRICING });
         applyTrialDaysCopy(DEFAULT_FALLBACK_PRICING.trial.days);
@@ -338,15 +385,17 @@ function validateForm(data) {
     return errors;
 }
 
+if (demoForm) {
 demoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    showDemoFormError('');
 
     const formData = new FormData(demoForm);
     const data = Object.fromEntries(formData);
 
     const errors = validateForm(data);
     if (errors.length > 0) {
-        alert(errors.join('\n'));
+        showDemoFormError(errors.join(' '));
         return;
     }
 
@@ -377,30 +426,25 @@ demoForm.addEventListener('submit', async (e) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                Accept: 'application/json',
             },
             body: JSON.stringify(data),
+            mode: 'cors',
         });
 
-        if (IS_LOCAL) {
-            console.log('Response status:', response.status);
-        }
-
-        let result;
-        const contentType = response.headers.get('content-type') || '';
-        if (contentType.includes('application/json')) {
-            result = await response.json();
-        } else {
-            throw new Error(`Unexpected response (${response.status}). Please try again later.`);
-        }
+        const result = await parseResponseBody(response);
 
         if (IS_LOCAL) {
-            console.log('Response data:', result);
+            console.log('Response status:', response.status, result);
         }
 
         if (response.ok && result.success) {
-            alert('Thank you! Our team will contact you shortly.');
+            showDemoFormError('');
+            alert(result.message || 'Thank you! Our team will contact you shortly.');
             demoForm.reset();
             floatingForm.style.display = 'none';
+            floatingForm.classList.remove('is-visible');
+            sessionStorage.setItem(DISMISS_KEY, '1');
 
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'generate_lead', {
@@ -416,19 +460,22 @@ demoForm.addEventListener('submit', async (e) => {
             if (IS_LOCAL) {
                 console.error('API Error:', result);
             }
-            const errorMsg = result.message || result.error || 'Something went wrong. Please try again.';
-            alert(`Error: ${errorMsg}`);
+            showDemoFormError(formatApiError(result, response.status));
         }
     } catch (error) {
         if (IS_LOCAL) {
             console.error('Demo request error:', error);
         }
-        alert(`Network error: ${error.message}. Please try again or contact us directly at support@autowave.in`);
+        const msg = error instanceof TypeError && String(error.message).includes('fetch')
+            ? 'Could not reach the server. Check your connection or try again later.'
+            : (error.message || 'Network error');
+        showDemoFormError(`${msg} You can also email support@autowave.in`);
     } finally {
         submitButton.disabled = false;
         submitButton.innerHTML = originalButtonText;
     }
 });
+}
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', function onAnchorClick(e) {
