@@ -3,7 +3,8 @@ const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navMenu = document.getElementById('navMenu');
 
 mobileMenuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+    const open = navMenu.classList.toggle('active');
+    mobileMenuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
 });
 
 // Floating Form
@@ -31,28 +32,90 @@ function registerUrl() {
     return `${portalBase()}/register`;
 }
 
+function loginUrl() {
+    return `${portalBase()}/login`;
+}
+
+function privacyUrl() {
+    return `${portalBase()}/privacy`;
+}
+
 function formatInr(amount) {
     return `₹${Number(amount).toLocaleString('en-IN')}`;
 }
 
+const DEFAULT_FALLBACK_PRICING = {
+    trial: { days: 14, price: 0 },
+    plans: [
+        {
+            id: 'monthly',
+            name: 'Monthly',
+            price: 499,
+            currency: 'INR',
+            periodLabel: '/month',
+            featured: false,
+            features: [
+                'Unlimited WhatsApp automation',
+                'Create & use workflows',
+                'Advanced analytics dashboard',
+                'Any business type support',
+            ],
+            ctaLabel: 'Get Started',
+        },
+        {
+            id: 'yearly',
+            name: 'Yearly',
+            price: 4999,
+            currency: 'INR',
+            periodLabel: '/year',
+            featured: true,
+            badge: 'Best Value',
+            savings: 'Save ₹989/year',
+            features: [
+                'Unlimited WhatsApp automation',
+                'Create & use workflows',
+                'Advanced analytics dashboard',
+                'Any business type support',
+                'Priority support',
+            ],
+            ctaLabel: 'Start Free Trial',
+        },
+    ],
+};
+
+const DEFAULT_FALLBACK_INDUSTRIES = [
+    { id: 'healthcare', label: 'Healthcare Clinic' },
+    { id: 'retail', label: 'Retail Shop' },
+    { id: 'coaching', label: 'Coaching Center' },
+    { id: 'other', label: 'Other Business' },
+];
+
 function openDemoForm() {
     floatingForm.style.display = 'block';
+    floatingForm.classList.add('is-visible');
 }
 
-document.querySelectorAll('#bookDemoHeader, #bookDemoPricing, #bookDemoCTA, #bookDemoHero').forEach((btn) => {
-    btn.addEventListener('click', openDemoForm);
+document.querySelectorAll(
+    '#bookDemoHeader, #bookDemoPricing, #bookDemoCTA, #bookDemoHero, #bookDemoMobile, #bookDemoNavMobile, #bookDemoFooterBtn',
+).forEach((btn) => {
+    btn.addEventListener('click', () => {
+        openDemoForm();
+        navMenu?.classList.remove('active');
+        mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+    });
 });
 
 formClose.addEventListener('click', () => {
     floatingForm.style.display = 'none';
+    floatingForm.classList.remove('is-visible');
     sessionStorage.setItem(DISMISS_KEY, '1');
 });
 
 setTimeout(() => {
-    if (!sessionStorage.getItem(DISMISS_KEY)) {
-        floatingForm.style.display = 'block';
+    if (!sessionStorage.getItem(DISMISS_KEY) && window.matchMedia('(min-width: 769px)').matches) {
+        openDemoForm();
     }
-}, 5000);
+}, 12000);
 
 function populateIndustrySelect(industries) {
     const select = document.getElementById('businessTypeSelect');
@@ -68,9 +131,33 @@ function populateIndustrySelect(industries) {
 
 function applyTrialLinks() {
     const register = registerUrl();
-    ['startTrialHero', 'startTrialCTA'].forEach((id) => {
+    const login = loginUrl();
+    const privacy = privacyUrl();
+
+    [
+        'startTrialHero', 'startTrialCTA', 'startTrialHeader', 'startTrialMobile',
+        'startTrialNavMobile', 'startTrialFooter', 'footerRegister',
+    ].forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.setAttribute('href', register);
+    });
+
+    ['loginHeader', 'loginNavMobile', 'footerLogin'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute('href', login);
+    });
+
+    document.querySelectorAll('.site-footer__links a[href*="privacy"], .site-footer__bottom-links a[href*="privacy"], .aw-footer__links a[href*="privacy"], .aw-footer__bar-inner a[href*="privacy"]').forEach((el) => {
+        el.setAttribute('href', privacy);
+    });
+}
+
+function applyTrialDaysCopy(days) {
+    const d = days ?? 14;
+    const ids = ['trialDaysText', 'footerTrialDays', 'heroTrialDays'];
+    ids.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = String(d);
     });
 }
 
@@ -78,19 +165,27 @@ function renderPricing(config) {
     const grid = document.getElementById('pricingGrid');
     const banner = document.getElementById('trialBanner');
     const pricing = config?.pricing;
-    if (!pricing) return;
+    if (!pricing) {
+        if (grid) grid.classList.remove('is-loading');
+        return;
+    }
 
     if (banner) {
         const trialDays = pricing.trial?.days ?? 14;
+        applyTrialDaysCopy(trialDays);
         const span = banner.querySelector('span');
         if (span) {
-            span.innerHTML = `Start with a <strong>${trialDays}-day free trial</strong> - No credit card required`;
+            span.innerHTML = `Start with a <strong>${trialDays}-day free trial</strong> — No credit card required`;
         }
     }
 
-    if (!grid || !Array.isArray(pricing.plans)) return;
+    if (!grid || !Array.isArray(pricing.plans)) {
+        grid?.classList.remove('is-loading');
+        return;
+    }
 
     const register = registerUrl();
+    grid.classList.remove('is-loading');
     grid.innerHTML = '';
 
     pricing.plans.forEach((plan) => {
@@ -160,7 +255,13 @@ function buildChatConversation(config) {
 async function loadWebsiteConfig() {
     try {
         const res = await fetch(`${DEFAULT_API_BASE}/api/website/config`);
-        if (!res.ok) return;
+        if (!res.ok) {
+            populateIndustrySelect(DEFAULT_FALLBACK_INDUSTRIES);
+            renderPricing({ pricing: DEFAULT_FALLBACK_PRICING });
+            applyTrialDaysCopy(DEFAULT_FALLBACK_PRICING.trial.days);
+            applyTrialLinks();
+            return;
+        }
         const config = await res.json();
         websiteConfig = config;
 
@@ -173,15 +274,21 @@ async function loadWebsiteConfig() {
         populateIndustrySelect(config.industries);
         renderPricing(config);
         applyTrialLinks();
-        chatConversation = buildChatConversation(config);
+        const trialDays = config?.pricing?.trial?.days ?? 14;
+        applyTrialDaysCopy(trialDays);
 
-        if (!chatReplayStarted) {
+        if (document.getElementById('chatMessages') && !chatReplayStarted) {
+            chatConversation = buildChatConversation(config);
             chatReplayStarted = true;
             setTimeout(startChatReplay, 1000);
         }
     } catch {
-        chatConversation = buildChatConversation(null);
-        if (!chatReplayStarted) {
+        populateIndustrySelect(DEFAULT_FALLBACK_INDUSTRIES);
+        renderPricing({ pricing: DEFAULT_FALLBACK_PRICING });
+        applyTrialDaysCopy(DEFAULT_FALLBACK_PRICING.trial.days);
+        applyTrialLinks();
+        if (document.getElementById('chatMessages') && !chatReplayStarted) {
+            chatConversation = buildChatConversation(null);
             chatReplayStarted = true;
             setTimeout(startChatReplay, 1000);
         }
@@ -334,9 +441,39 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    header.classList.toggle('scrolled', window.scrollY > 10);
+    const header = document.querySelector('.aw-header') || document.querySelector('.site-header') || document.querySelector('.header');
+    if (header) header.classList.toggle('scrolled', window.scrollY > 10);
 });
+
+(function initSectionNavHighlight() {
+    const navLinks = document.querySelectorAll('.aw-nav .nav-link[href^="#"]');
+    if (!navLinks.length) return;
+
+    const sections = [...navLinks]
+        .map((link) => {
+            const id = link.getAttribute('href');
+            const el = id && id.length > 1 ? document.querySelector(id) : null;
+            return el ? { id, el, link } : null;
+        })
+        .filter(Boolean);
+
+    if (!sections.length) return;
+
+    const io = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const match = sections.find((s) => s.el === entry.target);
+                if (!match) return;
+                navLinks.forEach((l) => l.classList.remove('is-active'));
+                match.link.classList.add('is-active');
+            });
+        },
+        { rootMargin: '-40% 0px -45% 0px', threshold: 0 },
+    );
+
+    sections.forEach((s) => io.observe(s.el));
+})();
 
 document.querySelectorAll('.faq-question').forEach((question) => {
     question.addEventListener('click', () => {
@@ -357,6 +494,19 @@ const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px',
 };
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal-on-scroll, .reveal-stagger, .benefit-block.reveal-stagger, .aw-reveal').forEach((el) => {
+    revealObserver.observe(el);
+});
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -466,3 +616,19 @@ function startChatReplay() {
 
     playNextMessage();
 }
+
+function initLandingWhatsAppDemo() {
+    /* Handled by landing-motion.js */
+}
+
+function initPhoneTilt() {
+    /* Handled by landing-motion.js */
+}
+
+function initDemoApprovePlay() {
+    /* Handled by landing-motion.js */
+}
+
+initLandingWhatsAppDemo();
+initPhoneTilt();
+initDemoApprovePlay();

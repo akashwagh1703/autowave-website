@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 560" fill="none" role="img" aria-labelledby="heroTitle">
+  <title id="heroTitle">WhatsApp booking with owner approval</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="880" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFD"/>
+      <stop offset="0.55" stop-color="#F0F4FF"/>
+      <stop offset="1" stop-color="#E8F5EF"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#00D084"/>
+      <stop offset="1" stop-color="#2563FF"/>
+    </linearGradient>
+    <linearGradient id="deckTop" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF2FF"/>
+    </linearGradient>
+    <linearGradient id="deckSide" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#E6ECF5"/>
+      <stop offset="1" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <linearGradient id="phoneEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#374151"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="waHeader" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#128C7E"/>
+      <stop offset="1" stop-color="#25D366"/>
+    </linearGradient>
+    <filter id="lift" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="11" result="blur1"/>
+      <feOffset in="blur1" dx="0" dy="20" result="offset1"/>
+      <feFlood flood-color="#0B1F44" flood-opacity="0.14" result="flood1"/>
+      <feComposite in="flood1" in2="offset1" operator="in" result="shadow1"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur2"/>
+      <feOffset in="blur2" dx="0" dy="4" result="offset2"/>
+      <feFlood flood-color="#2563FF" flood-opacity="0.08" result="flood2"/>
+      <feComposite in="flood2" in2="offset2" operator="in" result="shadow2"/>
+      <feMerge>
+        <feMergeNode in="shadow1"/>
+        <feMergeNode in="shadow2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softOrb" x="-100%" y="-100%" width="300%" height="300%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="40"/>
+    </filter>
+  </defs>
+  <rect width="880" height="560" rx="28" fill="url(#sky)"/>
+  <circle cx="120" cy="100" r="90" fill="#00D084" fill-opacity="0.12" filter="url(#softOrb)"/>
+  <circle cx="760" cy="420" r="110" fill="#2563FF" fill-opacity="0.1" filter="url(#softOrb)"/>
+
+  <!-- Isometric platform -->
+  <g transform="translate(140 320)">
+    <path fill="url(#deckSide)" d="M0 80 L280 40 L560 80 L280 120 Z"/>
+    <path fill="url(#deckTop)" d="M0 40 L280 0 L560 40 L280 80 Z"/>
+    <path fill="#fff" fill-opacity="0.6" d="M80 52 L280 20 L480 52 L280 84 Z"/>
+  </g>
+
+  <!-- Connection arc -->
+  <path d="M420 280 Q440 220 520 200" stroke="url(#brand)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.55"/>
+  <path d="M460 300 Q500 260 560 240" stroke="#2563FF" stroke-width="2" stroke-dasharray="8 6" fill="none" opacity="0.35"/>
+
+  <!-- Customer phone (isometric tilt via group) -->
+  <g filter="url(#lift)" transform="translate(200 72) rotate(-6 180 200)">
+    <rect x="60" y="40" width="240" height="400" rx="36" fill="url(#phoneEdge)"/>
+    <rect x="72" y="58" width="216" height="364" rx="24" fill="#E5DDD5"/>
+    <rect x="72" y="58" width="216" height="52" fill="url(#waHeader)"/>
+    <circle cx="98" cy="84" r="16" fill="#fff" fill-opacity="0.35"/>
+    <rect x="122" y="76" width="88" height="9" rx="4.5" fill="#fff" fill-opacity="0.92"/>
+    <rect x="122" y="90" width="52" height="7" rx="3.5" fill="#fff" fill-opacity="0.5"/>
+    <rect x="88" y="130" width="128" height="40" rx="10" fill="#D9FDD3"/>
+    <text x="152" y="155" text-anchor="middle" fill="#065F46" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="500">Haircut · tomorrow</text>
+    <rect x="88" y="188" width="184" height="88" rx="10" fill="#fff"/>
+    <rect x="100" y="202" width="108" height="8" rx="4" fill="#008069" fill-opacity="0.25"/>
+    <rect x="100" y="220" width="160" height="32" rx="8" fill="#F8FAFD" stroke="#00D084" stroke-width="2"/>
+    <rect x="108" y="230" width="72" height="6" rx="3" fill="#5C6A82" fill-opacity="0.4"/>
+    <rect x="88" y="296" width="160" height="36" rx="18" fill="url(#brand)"/>
+    <text x="168" y="319" text-anchor="middle" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="600">Confirm booking</text>
+    <rect x="148" y="348" width="44" height="4" rx="2" fill="#111827" fill-opacity="0.3"/>
+  </g>
+
+  <!-- Owner card (floating) -->
+  <g filter="url(#lift)" transform="translate(480 88)">
+    <rect x="0" y="0" width="280" height="200" rx="20" fill="#fff"/>
+    <rect x="0" y="0" width="280" height="56" rx="20" fill="#0B1F44"/>
+    <rect x="0" y="36" width="280" height="20" fill="#0B1F44"/>
+    <circle cx="36" cy="28" r="14" fill="#00D084"/>
+    <rect x="58" y="20" width="120" height="8" rx="4" fill="#fff" fill-opacity="0.9"/>
+    <rect x="58" y="32" width="80" height="6" rx="3" fill="#fff" fill-opacity="0.45"/>
+    <text x="24" y="88" fill="#5C6A82" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="600" letter-spacing="0.04em">PENDING REQUEST</text>
+    <text x="24" y="118" fill="#0B1F44" font-family="Inter,system-ui,sans-serif" font-size="18" font-weight="700">Haircut</text>
+    <text x="24" y="142" fill="#5C6A82" font-family="Inter,system-ui,sans-serif" font-size="14">Tomorrow · 10:30 AM</text>
+    <rect x="24" y="158" width="108" height="36" rx="10" fill="#00D084"/>
+    <text x="78" y="181" text-anchor="middle" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="600">Approve</text>
+    <rect x="142" y="158" width="108" height="36" rx="10" fill="#F8FAFD" stroke="#E6ECF5" stroke-width="1"/>
+    <text x="196" y="181" text-anchor="middle" fill="#5C6A82" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="600">Decline</text>
+  </g>
+
+  <!-- Approval badge -->
+  <g filter="url(#glowGreen)" transform="translate(720 120)">
+    <circle r="52" fill="url(#brand)"/>
+    <path d="M-22 0 L-8 14 L24 -18" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <text x="720" y="200" text-anchor="middle" fill="#0B1F44" font-family="Inter,system-ui,sans-serif" font-size="14" font-weight="600">You stay in control</text>
+
+  <text x="440" y="44" text-anchor="middle" fill="#5C6A82" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="600" letter-spacing="0.06em">WHATSAPP → REVIEW → CONFIRM</text>
+</svg>

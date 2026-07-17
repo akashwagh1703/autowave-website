@@ -6,7 +6,7 @@ Static marketing site for [AutoWave](https://autowave.playltp.in) — demo lead 
 
 ## Stack
 
-- Plain HTML, CSS (`style.css`), vanilla JS (`script.js`)
+- Plain HTML, CSS (`landing-base.css`, `landing-pro.css`), vanilla JS (`script.js`, `landing-motion.js`)
 - No build step — deploy files as-is
 - Font Awesome + Google Fonts via CDN
 
@@ -53,7 +53,7 @@ To test against a local API, run `micro-saas-api` on port 3000 and ensure `CORS_
 
 ## Deploy
 
-1. Upload all files to the web root (`index.html`, `style.css`, `script.js`, `content/`, `demo/`)
+1. Upload all files to the web root (`index.html`, `landing-base.css`, `landing-pro.css`, `landing-polish.css`, `script.js`, `landing-motion.js`, `content/`, `demo/`)
 2. Ensure `content/autowave-icon.png` is present
 3. Confirm the site origin matches `CORS_ORIGINS` on the API
 
@@ -64,8 +64,12 @@ No environment file is required on the website itself — configuration is loade
 | File / folder | Purpose |
 |---------------|---------|
 | `index.html` | Landing page structure |
-| `script.js` | Config load, demo form, pricing render, chat replay |
-| `style.css` | Layout and components |
+| `landing-base.css` | Reset, buttons, demo form shell |
+| `landing-pro.css` | Full landing design system |
+| `landing-polish.css` | Final polish: motion, focus, loading states |
+| `landing-motion.js` | WhatsApp demo animation, hero tilt |
+| `script.js` | Config load, demo form, pricing render |
+| `style.css` | Legacy (not used by current `index.html`) |
 | `content/` | Logo and image assets |
 | `demo/confirm/` | Demo confirmation page |
 

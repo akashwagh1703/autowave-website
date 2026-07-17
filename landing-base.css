@@ -1,0 +1,130 @@
+/**
+ * Minimal base for AutoWave landing (replaces full style.css on index)
+ */
+html {
+    scroll-behavior: smooth;
+}
+
+body.aw-landing {
+    margin: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.aw-landing .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: auto;
+}
+
+.aw-landing .mobile-menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #0B1F44;
+    border-radius: 1px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.aw-landing .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    line-height: 1.25;
+    border: none;
+}
+
+.aw-landing .btn-block {
+    width: 100%;
+}
+
+.aw-landing .form-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #F8FAFD;
+    border: 1px solid #E6ECF5;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #5C6A82;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aw-landing .form-close:hover {
+    color: #0B1F44;
+    background: #fff;
+}
+
+.aw-landing .floating-form {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: min(360px, calc(100vw - 32px));
+    background: #fff;
+    padding: 24px;
+    z-index: 250;
+    display: none;
+}
+
+.aw-landing .demo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aw-landing .demo-form input,
+.aw-landing .demo-form select {
+    padding: 12px 14px;
+    border: 1px solid #E6ECF5;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    background: #F8FAFD;
+    color: #0B1F44;
+    width: 100%;
+}
+
+.aw-landing .demo-form input:focus,
+.aw-landing .demo-form select:focus {
+    outline: none;
+    border-color: #00D084;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 208, 132, 0.15);
+}
+
+.aw-landing .demo-form input::placeholder {
+    color: #94a3b8;
+}
+
+@media (max-width: 768px) {
+    .aw-landing .floating-form {
+        bottom: 80px;
+        right: 16px;
+        left: 16px;
+        width: auto;
+    }
+}

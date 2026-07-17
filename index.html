@@ -3,503 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AutoWave - WhatsApp Business Automation Platform. Automate conversations, generate leads, and grow 24/7 on autopilot.">
-    <meta name="keywords" content="WhatsApp Automation, Business Automation, Lead Generation">
-    <meta name="author" content="AutoWave">
+    <meta name="description" content="AutoWave helps salons and clinics take bookings on WhatsApp. You approve each appointment before the customer is confirmed.">
+    <meta property="og:title" content="AutoWave — WhatsApp appointment booking">
+    <meta property="og:description" content="Guided WhatsApp bookings with owner approval, live availability, and instant customer confirmations.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/png" href="./content/autowave-icon.png">
-    <title>AutoWave - WhatsApp Automation Platform</title>
+    <title>AutoWave — WhatsApp appointment booking</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#0B1F44">
+    <link rel="stylesheet" href="landing-base.css">
+    <link rel="stylesheet" href="landing-pro.css">
+    <link rel="stylesheet" href="landing-polish.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <div class="logo">
-                <img src="./content/autowave-icon.png" alt="AutoWave" class="logo-icon">
-                <div class="logo-text">
-                    <span class="logo-name">AutoWave</span>
-                    <span class="logo-subtitle">WhatsApp Automation</span>
-                </div>
-            </div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+<body class="aw-landing">
+    <a class="aw-skip" href="#main">Skip to content</a>
+    <header class="aw-header" id="siteHeader">
+        <div class="aw-container aw-header__row">
+            <a href="#showcase" class="aw-brand">
+                <img src="./content/autowave-icon.png" alt="AutoWave" class="aw-brand__mark" width="36" height="36">
+                <span class="aw-brand__text">
+                    <span class="aw-brand__name">AutoWave</span>
+                    <span class="aw-brand__tag">WhatsApp booking platform</span>
+                </span>
+            </a>
+            <button class="mobile-menu-toggle aw-menu-btn" id="mobileMenuToggle" aria-label="Open menu" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
-            <nav class="nav" id="navMenu">
+            <nav class="aw-nav nav" id="navMenu" aria-label="Primary">
+                <a href="#how" class="nav-link">How it works</a>
+                <a href="#architecture" class="nav-link">Platform</a>
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#pricing" class="nav-link">Pricing</a>
-                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <div class="aw-nav__mobile-actions">
+                    <a href="https://app.autowave.playltp.in/login" class="btn btn-secondary-outline btn-block" id="loginNavMobile">Sign in</a>
+                    <button type="button" class="btn btn-secondary-outline btn-block" id="bookDemoNavMobile">Book a demo</button>
+                    <a href="https://app.autowave.playltp.in/register" class="btn btn-primary btn-block" id="startTrialNavMobile">Start free trial</a>
+                </div>
             </nav>
-            <div class="header-buttons">
-                <button class="btn btn-primary" id="bookDemoHeader">Book a Demo</button>
+            <div class="aw-header__actions">
+                <a href="https://app.autowave.playltp.in/login" class="aw-header__link" id="loginHeader">Sign in</a>
+                <button type="button" class="btn btn-secondary-outline btn-sm" id="bookDemoHeader">Book a demo</button>
+                <a href="https://app.autowave.playltp.in/register" class="btn btn-primary btn-sm" id="startTrialHeader">Start free trial</a>
             </div>
         </div>
     </header>
 
-    <!-- Floating Form -->
-    <div class="floating-form" id="floatingForm">
-        <button class="form-close" id="formClose"><i class="fas fa-times"></i></button>
-        <h3 class="form-title">Get a Demo</h3>
-        <p class="form-desc">Fill the form and our team will contact you.</p>
+    <div class="floating-form aw-demo-panel" id="floatingForm">
+        <button class="form-close" id="formClose" type="button" aria-label="Close"><i class="fas fa-times"></i></button>
+        <h3 class="form-title">Book a demo</h3>
+        <p class="form-desc">Our team will show you setup for your business type.</p>
         <form class="demo-form" id="demoForm">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Business Email" required>
-            <input type="tel" name="phone" placeholder="Phone Number" required>
-            <select name="businessType" id="businessTypeSelect" class="demo-form-select" required>
-                <option value="">Select your industry</option>
-            </select>
-            <input type="text" name="company" placeholder="Business / Website" required>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Request Demo</button>
+            <input type="text" name="name" placeholder="Full name" required>
+            <input type="email" name="email" placeholder="Work email" required>
+            <input type="tel" name="phone" placeholder="Phone" required>
+            <select name="businessType" id="businessTypeSelect" required><option value="">Business type</option></select>
+            <input type="text" name="company" placeholder="Business name" required>
+            <button type="submit" class="btn btn-primary btn-block">Request demo</button>
+            <p class="aw-form-note">We typically respond within one business day. No spam.</p>
         </form>
-        <p class="form-privacy">✓ We respect your privacy</p>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-left">
-                <h1 class="hero-headline">
-                    <span class="gradient-text">Automate Your Business.</span><br>
-                    <span>Engage Everywhere.</span>
-                </h1>
-                <p class="hero-subtitle">AutoWave helps businesses automate WhatsApp conversations, generate leads, and grow 24/7 on autopilot.</p>
-                <div class="hero-buttons">
-                    <a href="https://app.autowave.playltp.in/register" class="btn btn-primary btn-lg" id="startTrialHero">Start Free Trial</a>
-                    <button type="button" class="btn btn-secondary-outline btn-lg" id="bookDemoHero">Get a Demo</button>
+    <main id="main">
+        <section class="aw-hero" id="showcase">
+            <div class="aw-container aw-hero__layout">
+                <div class="aw-hero__content">
+                    <h1 class="aw-hero__title">WhatsApp bookings your team can trust</h1>
+                    <p class="aw-hero__lead">Customers pick a service and time in chat. You review each request and approve it once. They receive confirmation on WhatsApp—automatically.</p>
+                    <ul class="aw-checklist">
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Guided booking menus on WhatsApp</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Staff schedules and open slots</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Mobile alerts and one-tap approval</li>
+                    </ul>
+                    <ul class="aw-hero__proof" aria-label="Key benefits">
+                        <li><i class="fas fa-shield-halved" aria-hidden="true"></i> You approve every booking before it is confirmed</li>
+                        <li><i class="fas fa-calendar-day" aria-hidden="true"></i> Slots tied to your team&apos;s real calendar</li>
+                    </ul>
+                    <div class="aw-hero__cta">
+                        <a href="https://app.autowave.playltp.in/register" class="btn btn-primary btn-lg" id="startTrialHero">Start free trial</a>
+                        <button type="button" class="btn btn-secondary-outline btn-lg" id="bookDemoHero">Book a demo</button>
+                    </div>
+                    <p class="aw-hero__meta"><span id="heroTrialDays">14</span>-day trial · No credit card · Cancel anytime</p>
                 </div>
-
-                <!-- Trust Badges -->
-                <div class="trust-badges">
-                    <div class="trust-badge">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Bank-grade Security</span>
-                    </div>
-                    <div class="trust-badge">
-                        <i class="fas fa-clock"></i>
-                        <span>24/7 Support</span>
-                    </div>
-                    <div class="trust-badge">
-                        <i class="fas fa-users"></i>
-                        <span>500+ Customers</span>
+                <div class="aw-hero__media aw-scene-3d" id="heroScene">
+                    <span class="aw-hero__orb aw-hero__orb--green" aria-hidden="true"></span>
+                    <span class="aw-hero__orb aw-hero__orb--blue" aria-hidden="true"></span>
+                    <div class="aw-hero__stage">
+                        <img src="./content/hero-visual.svg" alt="WhatsApp booking and owner approval" class="aw-hero__illustration" width="880" height="560">
                     </div>
                 </div>
             </div>
+            <div class="aw-container aw-trust">
+                <span class="aw-trust__label">Designed for</span>
+                <ul class="aw-trust__list">
+                    <li><i class="fas fa-cut" aria-hidden="true"></i> Salons</li>
+                    <li><i class="fas fa-spa" aria-hidden="true"></i> Beauty</li>
+                    <li><i class="fas fa-stethoscope" aria-hidden="true"></i> Clinics</li>
+                    <li><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> Coaching</li>
+                    <li><i class="fas fa-briefcase" aria-hidden="true"></i> Consulting</li>
+                </ul>
+            </div>
+        </section>
 
-            <div class="hero-right">
-                <!-- WhatsApp Chat Replay -->
-                <div class="whatsapp-chat-replay">
-                    <div class="chat-header">
-                        <div class="chat-header-info">
-                            <div class="chat-avatar-container">
-                                <div class="chat-avatar">
-                                    <img src="./content/autowave-icon.png" alt="AutoWave Bot">
+        <section class="aw-section aw-section--alt aw-reveal" id="how">
+            <div class="aw-container">
+                <header class="aw-section-head">
+                    <p class="aw-eyebrow aw-eyebrow--center">Process</p>
+                    <h2 class="aw-section-head__title">How it works</h2>
+                    <p class="aw-section-head__desc">A clear path from message to confirmed appointment.</p>
+                </header>
+                <div class="aw-demo" id="devicesScene">
+                    <div class="aw-demo__grid">
+                        <figure class="aw-phone">
+                            <figcaption class="aw-phone__label">Customer · WhatsApp</figcaption>
+                            <article class="device device--whatsapp" id="phoneMockup">
+                                <div class="device__shell"><div class="device__screen">
+                                    <div class="ios-status"><span>10:42</span></div>
+                                    <div class="wa-app">
+                                        <header class="wa-topbar">
+                                            <div class="wa-topbar__avatar"><img src="./content/autowave-icon.png" alt=""></div>
+                                            <div class="wa-topbar__info"><strong>Your business</strong><span>WhatsApp Business</span></div>
+                                        </header>
+                                        <div class="wa-wallpaper"></div>
+                                        <div class="wa-thread" id="waChatBody">
+                                            <div class="wa-step" data-step="0"><div class="wa-row wa-row--out"><div class="wa-bubble wa-bubble--out"><p>I’d like a haircut tomorrow</p></div></div></div>
+                                            <div class="wa-step" data-step="1"><div class="wa-reply-card"><div class="wa-reply-card__title">Service</div><button type="button" class="wa-reply-row wa-reply-row--active"><span>Haircut</span></button></div></div>
+                                            <div class="wa-step" data-step="2"><div class="wa-reply-card"><div class="wa-reply-card__title">Time</div><button type="button" class="wa-reply-row wa-reply-row--active"><span>Tomorrow · 10:30 AM</span></button></div></div>
+                                            <div class="wa-step" data-step="3"><div class="wa-row wa-row--in"><div class="wa-bubble wa-bubble--in wa-bubble--status"><p>Request received. Awaiting confirmation.</p></div></div></div>
+                                            <div class="wa-typing" id="waTyping" hidden><span></span><span></span><span></span></div>
+                                        </div>
+                                    </div>
+                                </div></div>
+                            </article>
+                        </figure>
+                        <figure class="aw-owner" id="ownerPhone">
+                            <figcaption class="aw-phone__label">Owner · AutoWave app</figcaption>
+                            <div class="owner-panel">
+                                <div class="owner-panel__header"><img src="./content/autowave-icon.png" alt=""> Booking request</div>
+                                <div class="owner-panel__body">
+                                    <p class="owner-panel__service">Haircut</p>
+                                    <p class="owner-panel__time">Tomorrow, 10:30 AM</p>
+                                    <p class="owner-panel__phone">Customer · WhatsApp</p>
                                 </div>
-                                <div class="online-indicator"></div>
+                                <div class="owner-panel__actions" id="ownerActions">
+                                    <button type="button" class="owner-panel__btn owner-panel__btn--approve" id="demoApprove">Confirm</button>
+                                    <button type="button" class="owner-panel__btn owner-panel__btn--decline">Decline</button>
+                                </div>
                             </div>
-                            <div class="chat-title-info">
-                                <h4>AutoWave Bot</h4>
-                                <span class="chat-status" id="chatStatus">Online</span>
-                            </div>
-                        </div>
-                        <div class="chat-icons">
-                            <i class="fas fa-phone"></i>
-                            <i class="fas fa-video"></i>
-                            <i class="fas fa-ellipsis-v"></i>
-                        </div>
-                    </div>
-                    <div class="chat-messages" id="chatMessages">
-                        <!-- Messages will be dynamically added here -->
-                    </div>
-                    <div class="chat-input">
-                        <i class="fas fa-smile"></i>
-                        <input type="text" placeholder="Type a message..." disabled>
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-microphone"></i>
+                        </figure>
                     </div>
                 </div>
+                <div class="aw-flow">
+                    <article class="aw-flow__step aw-reveal aw-reveal--delay-1"><span class="aw-flow__num">1</span><h3>Customer chats</h3><p>They choose options from simple menus.</p></article>
+                    <article class="aw-flow__step aw-reveal aw-reveal--delay-2"><span class="aw-flow__num">2</span><h3>You review</h3><p>Approve or decline from your phone.</p></article>
+                    <article class="aw-flow__step aw-reveal aw-reveal--delay-3"><span class="aw-flow__num">3</span><h3>WhatsApp update</h3><p>They get the final yes or no message.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="aw-section aw-reveal" id="architecture">
+            <div class="aw-container aw-split">
+                <div class="aw-split__copy">
+                    <p class="aw-eyebrow">Platform</p>
+                    <h2 class="aw-section-head__title aw-section-head__title--left">Connected to your real schedule</h2>
+                    <p class="aw-section-head__desc aw-section-head__desc--left">AutoWave links WhatsApp to your team calendar. Appointments are never confirmed without your approval.</p>
+                    <ul class="aw-split__points">
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Real-time slot availability per staff member</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Pending bookings until you approve</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Automatic WhatsApp confirmation messages</li>
+                    </ul>
+                </div>
+                <div class="aw-split__media aw-diagram-wrap">
+                    <div class="aw-diagram-stage" id="diagramScene">
+                        <img src="./content/architecture-3d.svg" alt="Customer, AutoWave platform, calendar, and owner approval" class="aw-diagram" width="720" height="520" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="aw-section aw-section--alt aw-reveal" id="features">
+            <div class="aw-container">
+                <header class="aw-section-head">
+                    <p class="aw-eyebrow aw-eyebrow--center">Features</p>
+                    <h2 class="aw-section-head__title">Everything you need to run bookings on chat</h2>
+                    <p class="aw-section-head__desc">One platform for chat, calendar, alerts, and team inbox.</p>
+                </header>
+                <div class="aw-features">
+                    <article class="aw-feature"><div class="aw-feature__icon"><i class="fab fa-whatsapp"></i></div><h3>WhatsApp &amp; Instagram</h3><p>Reach customers on the channels they already use.</p></article>
+                    <article class="aw-feature"><div class="aw-feature__icon"><i class="fas fa-calendar-check"></i></div><h3>Live availability</h3><p>Working hours and slots per team member.</p></article>
+                    <article class="aw-feature"><div class="aw-feature__icon"><i class="fas fa-user-check"></i></div><h3>Owner approval</h3><p>You control what gets confirmed.</p></article>
+                    <article class="aw-feature"><div class="aw-feature__icon"><i class="fas fa-bell"></i></div><h3>Instant alerts</h3><p>Notifications on mobile and desktop.</p></article>
+                    <article class="aw-feature"><div class="aw-feature__icon"><i class="fas fa-inbox"></i></div><h3>Shared inbox</h3><p>One place for customer conversations.</p></article>
+                    <article class="aw-feature"><div class="aw-feature__icon"><i class="fas fa-store"></i></div><h3>Industry templates</h3><p>Ready-made flows for salons and clinics.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="aw-section pricing pricing-compact aw-reveal" id="pricing">
+            <div class="aw-container">
+                <header class="aw-section-head">
+                    <p class="aw-eyebrow aw-eyebrow--center">Plans</p>
+                    <h2 class="aw-section-head__title">Pricing</h2>
+                    <p class="aw-section-head__desc">Transparent plans. Start with a free trial.</p>
+                </header>
+                <div class="trial-banner aw-trial-bar" id="trialBanner">
+                    <span><strong>14-day free trial</strong> on all plans</span>
+                    <button type="button" class="btn btn-secondary-outline btn-sm" id="bookDemoPricing">Contact sales</button>
+                </div>
+                <div class="pricing-grid is-loading" id="pricingGrid" aria-live="polite">
+                    <div class="aw-pricing-skeleton" aria-hidden="true"></div>
+                    <div class="aw-pricing-skeleton" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="aw-section aw-cta-band">
+            <div class="aw-container aw-cta-band__inner">
+                <h2 class="aw-cta-band__title">Start taking bookings on WhatsApp</h2>
+                <p class="aw-cta-band__text"><span id="trialDaysText">14</span> days free, or book a demo with our team.</p>
+                <div class="aw-cta-band__actions">
+                    <a href="https://app.autowave.playltp.in/register" class="btn btn-primary btn-lg" id="startTrialCTA">Start free trial</a>
+                    <button type="button" class="btn btn-secondary-outline btn-lg aw-cta-band__ghost" id="bookDemoCTA">Book a demo</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="aw-footer site-footer">
+        <div class="aw-container aw-footer__grid">
+            <div class="aw-footer__brand">
+                <a href="#showcase" class="aw-footer__logo"><img src="./content/autowave-icon.png" alt="" width="32" height="32"><span>AutoWave</span></a>
+                <p>WhatsApp appointment booking for service businesses in India.</p>
+                <a href="mailto:support@autowave.in" class="aw-footer__email">support@autowave.in</a>
+            </div>
+            <div>
+                <h4 class="aw-footer__heading">Product</h4>
+                <ul class="aw-footer__links">
+                    <li><a href="#architecture">Platform</a></li>
+                    <li><a href="#how">How it works</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="aw-footer__heading">Account</h4>
+                <ul class="aw-footer__links">
+                    <li><a href="https://app.autowave.playltp.in/register" id="footerRegister">Register</a></li>
+                    <li><a href="https://app.autowave.playltp.in/login" id="footerLogin">Sign in</a></li>
+                    <li><a href="https://app.autowave.playltp.in/privacy">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="aw-footer__actions">
+                <button type="button" class="btn btn-primary btn-block" id="bookDemoFooterBtn">Book a demo</button>
+                <a href="https://app.autowave.playltp.in/register" class="btn btn-secondary-outline btn-block aw-footer__trial" id="startTrialFooter">Start free trial</a>
             </div>
         </div>
-        <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#00D084;stop-opacity:0.15" />
-                    <stop offset="100%" style="stop-color:#2563FF;stop-opacity:0.15" />
-                </linearGradient>
-            </defs>
-            <path d="M0,40 Q150,20 300,40 T600,40 T900,40 T1200,40 L1200,120 L0,120 Z" fill="url(#waveGrad)"/>
-            <path d="M0,60 Q150,40 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z" fill="url(#waveGrad)" opacity="0.5"/>
-        </svg>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="section-container">
-            <h2 class="section-title">Powerful Features Built for Growth</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-zap"></i></div>
-                    <h3>Auto Respond</h3>
-                    <p>Instant replies to customer queries 24/7</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-users"></i></div>
-                    <h3>Capture More Leads</h3>
-                    <p>Collect, qualify & manage leads automatically</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Powerful Analytics</h3>
-                    <p>Track performance and optimize conversions</p>
-                </div>
-            </div>
-        </div>
-        <svg class="wave wave-bottom" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#00D084;stop-opacity:0.15" />
-                    <stop offset="100%" style="stop-color:#2563FF;stop-opacity:0.15" />
-                </linearGradient>
-            </defs>
-            <path d="M0,60 Q150,40 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z" fill="url(#waveGrad2)"/>
-            <path d="M0,80 Q150,60 300,80 T600,80 T900,80 T1200,80 L1200,120 L0,120 Z" fill="url(#waveGrad2)" opacity="0.5"/>
-        </svg>
-    </section>
-
-    <!-- Integrations Section -->
-    <section class="integrations" id="integrations">
-        <div class="section-container">
-            <h2 class="section-title">Integrate with Your Favorite Tools</h2>
-            <div class="integrations-grid">
-                <div class="integration-card">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>Shopify</span>
-                </div>
-                <div class="integration-card">
-                    <i class="fab fa-wordpress"></i>
-                    <span>WordPress</span>
-                </div>
-                <div class="integration-card">
-                    <i class="fas fa-cube"></i>
-                    <span>WooCommerce</span>
-                </div>
-                <div class="integration-card">
-                    <i class="fas fa-bolt"></i>
-                    <span>Zapier</span>
-                </div>
-                <div class="integration-card">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>HubSpot</span>
-                </div>
-                <div class="integration-card">
-                    <i class="fas fa-code"></i>
-                    <span>API & Webhooks</span>
-                </div>
-            </div>
-        </div>
-        <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#00D084;stop-opacity:0.15" />
-                    <stop offset="100%" style="stop-color:#2563FF;stop-opacity:0.15" />
-                </linearGradient>
-            </defs>
-            <path d="M0,40 Q150,20 300,40 T600,40 T900,40 T1200,40 L1200,120 L0,120 Z" fill="url(#waveGrad3)"/>
-            <path d="M0,60 Q150,40 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z" fill="url(#waveGrad3)" opacity="0.5"/>
-        </svg>
-    </section>
-
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="section-container">
-            <h2 class="section-title">How AutoWave Works</h2>
-            <p class="section-subtitle">4 Simple Steps to Automate Your Business</p>
-            
-            <div class="flow-container">
-                <div class="flow-item">
-                    <div class="flow-icon-box">
-                        <div class="flow-icon">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                    </div>
-                    <h3>Welcome Message</h3>
-                    <p>Customer sends a message to your WhatsApp Business account</p>
-                </div>
-
-                <div class="flow-connector">
-                    <svg viewBox="0 0 100 40" preserveAspectRatio="none">
-                        <path d="M0,20 Q25,0 50,20 T100,20" stroke="#00D084" stroke-width="2" fill="none" stroke-linecap="round"/>
-                        <polygon points="95,20 100,20 97,17" fill="#00D084"/>
-                    </svg>
-                </div>
-
-                <div class="flow-item">
-                    <div class="flow-icon-box">
-                        <div class="flow-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                    </div>
-                    <h3>Send Catalog</h3>
-                    <p>AutoWave automatically sends product catalog or information</p>
-                </div>
-
-                <div class="flow-connector">
-                    <svg viewBox="0 0 100 40" preserveAspectRatio="none">
-                        <path d="M0,20 Q25,0 50,20 T100,20" stroke="#2563FF" stroke-width="2" fill="none" stroke-linecap="round"/>
-                        <polygon points="95,20 100,20 97,17" fill="#2563FF"/>
-                    </svg>
-                </div>
-
-                <div class="flow-item">
-                    <div class="flow-icon-box">
-                        <div class="flow-icon">
-                            <i class="fas fa-calendar-check"></i>
-                        </div>
-                    </div>
-                    <h3>Booking</h3>
-                    <p>Customer books an appointment or completes a purchase</p>
-                </div>
-
-                <div class="flow-connector">
-                    <svg viewBox="0 0 100 40" preserveAspectRatio="none">
-                        <path d="M0,20 Q25,0 50,20 T100,20" stroke="#00D084" stroke-width="2" fill="none" stroke-linecap="round"/>
-                        <polygon points="95,20 100,20 97,17" fill="#00D084"/>
-                    </svg>
-                </div>
-
-                <div class="flow-item">
-                    <div class="flow-icon-box">
-                        <div class="flow-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                    </div>
-                    <h3>Live Agent</h3>
-                    <p>Handoff to your team for personalized support if needed</p>
-                </div>
-            </div>
-
-            <div class="flow-benefits">
-                <div class="benefit-item">
-                    <div class="benefit-icon"><i class="fas fa-bolt"></i></div>
-                    <span>Instant Response</span>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
-                    <span>Automated Process</span>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon"><i class="fas fa-smile"></i></div>
-                    <span>Happy Customers</span>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
-                    <span>More Sales</span>
-                </div>
-            </div>
-        </div>
-        <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#00D084;stop-opacity:0.15" />
-                    <stop offset="100%" style="stop-color:#2563FF;stop-opacity:0.15" />
-                </linearGradient>
-            </defs>
-            <path d="M0,40 Q150,20 300,40 T600,40 T900,40 T1200,40 L1200,120 L0,120 Z" fill="url(#waveGrad4)"/>
-            <path d="M0,60 Q150,40 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z" fill="url(#waveGrad4)" opacity="0.5"/>
-        </svg>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="section-container">
-            <h2 class="section-title">Trusted by Growing Businesses</h2>
-            <p class="section-subtitle">See what our customers have to say about AutoWave</p>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="./content/autowave-icon.png" alt="Customer" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>Rajesh Kumar</h4>
-                            <p>Owner, Kumar Electronics</p>
-                        </div>
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"AutoWave transformed our customer service. We now handle 3x more inquiries without hiring more staff. The ROI was visible within the first month."</p>
-                    <div class="testimonial-metrics">
-                        <span><strong>3x</strong> More Responses</span>
-                        <span><strong>45%</strong> Higher Conversion</span>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="./content/autowave-icon.png" alt="Customer" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>Priya Sharma</h4>
-                            <p>Founder, FashionBoutique</p>
-                        </div>
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"The automation features are incredible. Our abandoned cart recovery rate increased by 60% after implementing AutoWave. Highly recommended!"</p>
-                    <div class="testimonial-metrics">
-                        <span><strong>60%</strong> Cart Recovery</span>
-                        <span><strong>2.5x</strong> ROI</span>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="./content/autowave-icon.png" alt="Customer" class="testimonial-avatar">
-                        <div class="testimonial-info">
-                            <h4>Amit Patel</h4>
-                            <p>Director, HealthCare Plus</p>
-                        </div>
-                        <div class="testimonial-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"Patient appointment booking became seamless. Our staff can now focus on care instead of administrative tasks. Game-changer for healthcare."</p>
-                    <div class="testimonial-metrics">
-                        <span><strong>80%</strong> Time Saved</span>
-                        <span><strong>95%</strong> Patient Satisfaction</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad6" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#00D084;stop-opacity:0.15" />
-                    <stop offset="100%" style="stop-color:#2563FF;stop-opacity:0.15" />
-                </linearGradient>
-            </defs>
-            <path d="M0,40 Q150,20 300,40 T600,40 T900,40 T1200,40 L1200,120 L0,120 Z" fill="url(#waveGrad6)"/>
-            <path d="M0,60 Q150,40 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z" fill="url(#waveGrad6)" opacity="0.5"/>
-        </svg>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <div class="section-container">
-            <h2 class="section-title">Simple, Transparent Pricing</h2>
-            <div class="trial-banner" id="trialBanner">
-                <i class="fas fa-gift"></i>
-                <span>Start with a <strong>14-day free trial</strong> - No credit card required</span>
-                <button type="button" class="btn btn-secondary-outline btn-sm" id="bookDemoPricing">Book a Demo</button>
-            </div>
-            <div class="pricing-grid" id="pricingGrid">
-                <!-- Pricing cards loaded from /api/website/config -->
-            </div>
-        </div>
-        <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad5" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#00D084;stop-opacity:0.15" />
-                    <stop offset="100%" style="stop-color:#2563FF;stop-opacity:0.15" />
-                </linearGradient>
-            </defs>
-            <path d="M0,40 Q150,20 300,40 T600,40 T900,40 T1200,40 L1200,120 L0,120 Z" fill="url(#waveGrad5)"/>
-            <path d="M0,60 Q150,40 300,60 T600,60 T900,60 T1200,60 L1200,120 L0,120 Z" fill="url(#waveGrad5)" opacity="0.5"/>
-        </svg>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq" id="faq">
-        <div class="section-container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>How long does setup take?</span>
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    <div class="faq-answer">Setup takes just 2 minutes. Connect your WhatsApp account, configure automation rules, and you're ready to go!</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Do I need coding knowledge?</span>
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    <div class="faq-answer">No coding required! AutoWave provides an intuitive drag-and-drop interface for setting up automations.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Can I cancel my subscription anytime?</span>
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    <div class="faq-answer">Yes, you can cancel anytime with no penalties. Your data remains accessible for 30 days after cancellation.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>What kind of support do you offer?</span>
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    <div class="faq-answer">We offer email support for all plans and priority phone support for Professional and Enterprise plans.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Is my data secure?</span>
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    <div class="faq-answer">Absolutely. We use enterprise-grade encryption and comply with GDPR, CCPA, and other data protection regulations.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>Can I integrate with my existing tools?</span>
-                        <i class="fas fa-plus"></i>
-                    </button>
-                    <div class="faq-answer">Yes! AutoWave integrates with 500+ apps including Shopify, WordPress, HubSpot, Zapier, and many more.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-final">
-        <div class="section-container">
-            <h2>Ready to Transform Your Business?</h2>
-            <p>Join thousands of companies automating WhatsApp with AutoWave</p>
-            <div class="cta-buttons">
-                <a href="https://app.autowave.playltp.in/register" class="btn btn-primary btn-lg" id="startTrialCTA"><i class="fas fa-play-circle"></i> Start Your Free Trial</a>
-                <button type="button" class="btn btn-secondary-outline btn-lg" id="bookDemoCTA"><i class="fas fa-calendar"></i> Schedule a Demo</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="section-container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <img src="./content/autowave-icon.png" alt="AutoWave" class="footer-logo">
-                    <span>AutoWave</span>
-                </div>
-                <div class="footer-center">
-                    <p>© 2026 AutoWave. All rights reserved.</p>
-                    <div class="footer-links">
-                        <a href="https://app.autowave.playltp.in/privacy">Privacy Policy</a>
-                    </div>
-                </div>
+        <div class="aw-footer__bar">
+            <div class="aw-container aw-footer__bar-inner">
+                <p>© 2026 AutoWave. All rights reserved.</p>
+                <a href="https://app.autowave.playltp.in/privacy">Privacy policy</a>
             </div>
         </div>
     </footer>
 
+    <div class="mobile-demo-bar" id="mobileDemoBar">
+        <button type="button" class="mobile-demo-bar__demo" id="bookDemoMobile">Demo</button>
+        <a href="https://app.autowave.playltp.in/register" class="mobile-demo-bar__trial" id="startTrialMobile">Free trial</a>
+    </div>
+
     <script src="script.js"></script>
+    <script src="landing-motion.js"></script>
 </body>
 </html>
