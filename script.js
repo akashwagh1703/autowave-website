@@ -127,6 +127,7 @@ const DEFAULT_FALLBACK_PRICING = {
 };
 
 const DEFAULT_FALLBACK_INDUSTRIES = [
+    { id: 'salon', label: 'Salon / Spa' },
     { id: 'healthcare', label: 'Healthcare Clinic' },
     { id: 'retail', label: 'Retail Shop' },
     { id: 'coaching', label: 'Coaching Center' },
@@ -399,23 +400,15 @@ function validateForm(data) {
         errors.push('Please enter a valid name (at least 2 characters)');
     }
 
-    const email = String(data.email ?? '').trim();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailRegex.test(email)) {
+    const email = String(data.email ?? '').trim().toLowerCase();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!email || email.length > 254 || !emailRegex.test(email)) {
         errors.push('Please enter a valid email address');
     }
 
     const digits = String(data.phone ?? '').replace(/\D/g, '');
-    let mobile = digits;
-    if (mobile.length === 12 && mobile.startsWith('91')) {
-        mobile = mobile.slice(2);
-    } else if (mobile.length === 11 && mobile.startsWith('0')) {
-        mobile = mobile.slice(1);
-    } else if (mobile.length > 10) {
-        mobile = mobile.slice(-10);
-    }
-    if (!/^[6-9]\d{9}$/.test(mobile)) {
-        errors.push('Please enter a valid 10-digit Indian phone number');
+    if (digits.length !== 10 || !/^[6-9]\d{9}$/.test(digits)) {
+        errors.push('Please enter exactly 10 digits (Indian mobile, starting with 6–9)');
     }
 
     const businessType = String(data.businessType ?? '').trim();
@@ -449,12 +442,8 @@ demoForm.addEventListener('submit', async (e) => {
     data.companyName = String(data.company).trim();
     delete data.company;
 
-    const phoneDigits = String(data.phone).replace(/\D/g, '');
-    let mobile = phoneDigits;
-    if (mobile.length === 12 && mobile.startsWith('91')) mobile = mobile.slice(2);
-    else if (mobile.length === 11 && mobile.startsWith('0')) mobile = mobile.slice(1);
-    else if (mobile.length > 10) mobile = mobile.slice(-10);
-    data.phone = `+91${mobile}`;
+    data.email = String(data.email ?? '').trim().toLowerCase();
+    data.phone = String(data.phone ?? '').replace(/\D/g, '');
 
     const submitButton = demoForm.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.innerHTML;
